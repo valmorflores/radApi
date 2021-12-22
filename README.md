@@ -1,17 +1,16 @@
 
 This is a Api tool for accelerate integrations building.
+> test, use and change this. Thanks!
 
-> 
-
-**Install**
+## Install
 - Get and install codeigniter 4
 - Copy files to app folder
 - Install Firebird connection files (if you need firebird database support)
 - Configure database $default variable (Config/Database.php)
 
-**Try run (Example)**
+## Examples 
 
-*List of tables, from database*
+### List of tables, from database
 
 http://localhost:89/dev/radApi/public/v1/tables
 
@@ -76,8 +75,10 @@ Result:
     }
 
 }
-`` 
-*List of all fieldname from one table*
+``
+
+
+### List of all fieldname from one table
 
 http://localhost:89/dev/radApi/public/v1/tables/fieldnames/TBLACTIVITYLOG
 
@@ -147,10 +148,7 @@ Result:
 
 }
 
-
-
-
-**Congratulations**
+## Congratulations
 
 - CodeIgniter 4: https://github.com/codeigniter4/CodeIgniter4
 - Firebird connection: https://github.com/leirags/CI4-PDO-Firebird
