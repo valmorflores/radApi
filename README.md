@@ -107,6 +107,7 @@ http://localhost:89/dev/radApi/public/v1/tables/fields/TBLACTIVITYLOG
 
 Result:
 {
+
     "parameter_table_name": "TBLACTIVITYLOG",
     "status": 200,
     "error": null,
@@ -143,7 +144,7 @@ Result:
         }
     ],
     "messages": {
-        "success": "Dados"
+        "success": "Structure from table"
     }
 
 }
