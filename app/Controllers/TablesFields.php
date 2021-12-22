@@ -27,7 +27,7 @@ class TablesFields extends ResourceController
     }
 
     // Colunas da tabela
-    public function columns($table = null) {        
+    public function fields($table = null) {        
         $db2 = \Config\Database::connect('default');
         $table_name = !empty($table) ? $table : 'TBLCLIENTS';
         $columns = $db2->getFieldData($table_name);
@@ -56,5 +56,32 @@ class TablesFields extends ResourceController
             ];
         return $this->respond($response);
     }
-  
- }
+
+    // firldNames from table
+    public function fieldNames($table = null) {
+        $db2 = \Config\Database::connect('default');
+        $table_name = !empty($table) ? $table : 'TBLCLIENTS';
+        $columns = $db2->getFieldData($table_name);
+        $tables = [];
+        $finalcolumns = [];
+        foreach ($columns as $col)
+        {
+            $info = trim($col->name);
+            $finalcolumns[]=$info;
+        }          
+        $data = [];
+        $data = $finalcolumns;
+        $resp = $data;
+        $response = [
+            'parameter_table_name' => $table_name,
+            'status'   => 200,
+            'error'    => null,
+            'data'     => $resp,
+            'messages' => [
+                'success' => 'Field names list'
+                ]
+            ];
+        return $this->respond($response);
+    }
+
+}

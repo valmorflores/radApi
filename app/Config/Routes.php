@@ -36,7 +36,8 @@ $routes->setAutoRoute(true);
     $routes->get('users', 'APIUser::index');
     $routes->get('users/(:any)', 'APIUser::getUserByUsername/$1');
     $routes->get('tables', 'Tables::list');
-    $routes->get('tables/columns/(:any)', 'TablesFields::columns/$1');
+    $routes->get('tables/fields/(:any)', 'TablesFields::fields/$1');
+    $routes->get('tables/fieldnames/(:any)', 'TablesFields::fieldNames/$1');
     $routes->get('tables/search/(:any)', 'Tables::search/$1');
 });
  
