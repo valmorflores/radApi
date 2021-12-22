@@ -2,10 +2,10 @@
 This is a Api tool for accelerate integrations building.
 
 **Install**
-Get and install codeigniter
-Copy files to app folder
-Install Firebird connection files (if you need firebird database support)
-Configure database $default variable (Config/Database.php)
+- Get and install codeigniter 4
+- Copy files to app folder
+- Install Firebird connection files (if you need firebird database support)
+- Configure database $default variable (Config/Database.php)
 
 **Try run (Example)**
 
