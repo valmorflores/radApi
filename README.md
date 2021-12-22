@@ -44,6 +44,39 @@ Result:
 }
 ``
 
+
+http://localhost:89/dev/radApi/public/v1/tables/search/ACTIVITY
+
+Result: 
+
+``
+{
+
+    "parameter_partial_table_name": "ACTIVITY",
+    "status": 200,
+    "error": null,
+    "data": [
+        "TBLACTIVITYLOG",
+        "TBLPROJECTACTIVITY",
+        "TBLACTIVITYREPORT",
+        "TBLACTIVITYREPORTMEMBERS",
+        "TBLACTIVITYREPORTACTIVITY",
+        "TBLACTIVITYREPORTDISCUSSIONS",
+        "TBLACTIVITYREPORTFILES",
+        "TBLPINNEDACTIVITYREPORT",
+        "TBLACTIVITYREPORTNOTES",
+        "TBLACTIVITYREPORTSETTINGS",
+        "TBLACTIVITYREPORTCATEGORY",
+        "TBLACTIVITYREPORTCOMPETENCE",
+        "TBLLEADACTIVITYLOG",
+        "TBLACTIVITYREPORTCLIENTS"
+    ],
+    "messages": {
+        "success": "Search in tables with information"
+    }
+
+}
+`` 
 *List of all fieldname from one table*
 
 http://localhost:89/dev/radApi/public/v1/tables/fieldnames/TBLACTIVITYLOG
@@ -113,6 +146,8 @@ Result:
     }
 
 }
+
+
 
 
 **Congratulations**
