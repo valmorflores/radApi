@@ -25,37 +25,58 @@ class Tables extends ResourceController
         $this->ClientsModel = new ClientsModel();
         $this->session = session();
     }
-
-    // Colunas da tabela
-    public function columns($table = null) {        
+ 
+    public function tableList() {
         $db2 = \Config\Database::connect('default');
-        $table_name = !empty($table) ? $table : 'TBLCLIENTS';
-        $columns = $db2->_fieldData($table_name);
-        $tables = [];
+        $tables = $db2->listTables();
+        return $tables;
+    }
+
+    // List of tables
+    public function list() {
+        $tables = $this->tableList();
         $finalcolumns = [];
-        foreach ($columns as $col)
+        foreach ($tables as $row)
         {
-            $info = array('name' => trim($col->name),
-                    'type' => trim($col->type),
-                    'size' => trim($col->max_length),
-                    'default' => trim($col->default));
-            $finalcolumns[]=$info;
+            $finalcolumns[]=trim($row);
         }          
         $data = [];
-        
         $data = $finalcolumns;
         $resp = $data;
         $response = [
-            'table_name' => $table_name,
             'status'   => 200,
             'error'    => null,
             'data'     => $resp,
             'messages' => [
-                'success' => 'Dados'
+                'success' => 'List of tables'
                 ]
             ];
         return $this->respond($response);
     }
 
-
- }
+    // Search in tables list
+    public function search($table = null) {        
+        $tables = $this->tableList();
+        //var_dump($tables);die;
+        $finallist = [];
+        foreach ($tables as $row)
+        {            
+            if (strpos( $row, $table )!==false) {
+                $finallist[] = trim($row);
+            }
+        }          
+        $data = [];        
+        $data = $finallist;
+        $resp = $data;        
+        $response = [
+            'parameter_partial_table_name' => $table,
+            'status'   => 200,
+            'error'    => null,
+            'data'     => $resp,
+            'messages' => [
+                'success' => 'Search in tables with information'
+                ]
+            ];
+        return $this->respond($response);
+    }
+}

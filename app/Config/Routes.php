@@ -33,10 +33,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
  //$routes->resource('tables');
  $routes->group('v1', function ($routes) {
-    $routes->get('tables', 'Tables::index');
     $routes->get('users', 'APIUser::index');
     $routes->get('users/(:any)', 'APIUser::getUserByUsername/$1');
-    $routes->get('tables/(:any)/columns', 'Tables::columns/$1');
+    $routes->get('tables', 'Tables::list');
+    $routes->get('tables/columns/(:any)', 'TablesFields::columns/$1');
+    $routes->get('tables/search/(:any)', 'Tables::search/$1');
 });
  
  
