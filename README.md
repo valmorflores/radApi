@@ -33,13 +33,11 @@ Result:
         "TBLUSER",
         "TBLUSERTOKEN",
         "TBLUSERKEY",
-        "TBLUSERKEYHISTORY",
-        
+        "TBLUSERKEYHISTORY"
     ],
     "messages": {
         "success": "List of tables"
     }
-
 }
 
 *List of all fieldname from one table*
