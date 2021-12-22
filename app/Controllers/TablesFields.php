@@ -51,7 +51,7 @@ class TablesFields extends ResourceController
             'error'    => null,
             'data'     => $resp,
             'messages' => [
-                'success' => 'Dados'
+                'success' => 'Structure from table'
                 ]
             ];
         return $this->respond($response);
