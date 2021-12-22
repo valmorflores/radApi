@@ -15,31 +15,31 @@ http://localhost:89/dev/radApi/public/v1/tables
 
 Result:
 ``
-{<br>
-    "status": 200,<br>
-    "error": null,<br>
-    "data": [<br>
-        "TBLACTIVITYLOG",<br>
-        "TBLCLIENTS",<br>
-        "TBLTODOITEMS",<br>
-        "TBLLEADS",<br>
-        "TBLLEADSINTEGRATION",<br>
-        "TBLLEADACTIVITYLOG",<br>
-        "TBLLEADSEMAILINTEGRATIONEMAILS",<br>
-        "TBLREGIONS",<br>
-        "TBLREGIONSREPRESENTATIVE",<br>
-        "TBLAREAS",<br>
-        "TBLTHEMES",<br>
-        "TBLVERSION",<br>
-        "TBLUSER",<br>
-        "TBLUSERTOKEN",<br>
-        "TBLUSERKEY",<br>
-        "TBLUSERKEYHISTORY"<br>
-    ],<br>
-    "messages": {<br>
-        "success": "List of tables"<br>
-    }<br>
-}<br>
+{
+    "status": 200,
+    "error": null,
+    "data": [
+        "TBLACTIVITYLOG",
+        "TBLCLIENTS",
+        "TBLTODOITEMS",
+        "TBLLEADS",
+        "TBLLEADSINTEGRATION",
+        "TBLLEADACTIVITYLOG",
+        "TBLLEADSEMAILINTEGRATIONEMAILS",
+        "TBLREGIONS",
+        "TBLREGIONSREPRESENTATIVE",
+        "TBLAREAS",
+        "TBLTHEMES",
+        "TBLVERSION",
+        "TBLUSER",
+        "TBLUSERTOKEN",
+        "TBLUSERKEY",
+        "TBLUSERKEYHISTORY"
+    ],
+    "messages": {
+        "success": "List of tables"
+    }
+}
 ``
 
 *List of all fieldname from one table*
