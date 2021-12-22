@@ -14,7 +14,8 @@ Configure database $default variable (Config/Database.php)
 http://localhost:89/dev/radApi/public/v1/tables
 
 Result:
-``{
+``
+{
     "status": 200,
     "error": null,
     "data": [
@@ -38,7 +39,8 @@ Result:
     "messages": {
         "success": "List of tables"
     }
-}``
+}
+``
 
 *List of all fieldname from one table*
 
