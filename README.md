@@ -149,6 +149,32 @@ Result:
 
 }
 
+### Keys ans indexes from table
+
+http://localhost:89/dev/radApi/public/v1/tables/keys/TBLSTAFF
+
+Result:
+
+{
+
+    "parameter_table_name": "TBLSTAFF",
+    "status": 200,
+    "error": null,
+    "data": [
+        {
+            "0": "name",
+            "1": "TBLSTAFF",
+            "index_name": "IDX_PRIMARY",
+            "index_id": "1",
+            "foreign_key": ""
+        }
+    ],
+    "messages": {
+        "success": "Keys from table"
+    }
+
+}
+
 ## Congratulations
 
 - CodeIgniter 4: https://github.com/codeigniter4/CodeIgniter4
