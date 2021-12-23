@@ -231,8 +231,9 @@ Result:
 
 ### Data from table (with field key)
 
-> Information, parameters: tables/data-by/table/field/id
-> http://localhost:89/dev/radApi/public/v1/tables/data-by/TBLSTAFF/STAFFID/2
+> Information, parameters: 
+> - tables/data-by/table/field/id
+> - http://localhost:89/dev/radApi/public/v1/tables/data-by/TBLSTAFF/STAFFID/2
 
 
 ## Congratulations

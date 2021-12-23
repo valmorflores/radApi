@@ -34,7 +34,9 @@ class TablesData extends ResourceController
         $data = $list;
         $resp = $data;
         $response = [
-            'parameter_table_name' => $table_name,
+            'parameter_table_name' => $table,
+            'parameter_offset' => $offset,
+            'parameter_records' => $records,
             'status'   => 200,
             'error'    => null,
             'data'     => $resp,
@@ -58,7 +60,9 @@ class TablesData extends ResourceController
         $data = $list;
         $resp = $data;
         $response = [
-            'parameter_table_name' => $table_name,
+            'parameter_table_name' => $table,
+            'parameter_field' => $field,
+            'parameter_data' => $information,
             'status'   => 200,
             'error'    => null,
             'data'     => $resp,
