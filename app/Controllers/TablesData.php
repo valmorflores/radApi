@@ -49,7 +49,6 @@ class TablesData extends ResourceController
     public function getdataby($table = null, $field, $information) {
         $dataSet = $this->TableDataModel->getFromTableBy($table, $field, $information);
         $list=[];
-        
         foreach ($dataSet as $row)
         {
             $info = $row;

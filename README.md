@@ -175,6 +175,66 @@ Result:
 
 }
 
+### Data from table (with offset and limit)
+
+http://localhost:89/dev/radApi/public/v1/tables/data/TBLSTAFFS/0/1
+
+Result:
+
+{
+
+    "parameter_table_name": null,
+    "status": 200,
+    "error": null,
+    "data": [
+        {
+            "STAFFID": 1,
+            "EMAIL": "valmorflores@gmail.com",
+            "FIRSTNAME": "VALMOR",
+            "LASTNAME": "FLORES",
+            "FACEBOOK": null,
+            "LINKEDIN": null,
+            "PHONENUMBER": null,
+            "SKYPE": null,
+            "PASSWORD": "$2a$08$IQOa.Z.WBXmflhC/CkFuKuLvHCbiTdoEFDQ6PuZwXBD4bMru5GB8i",
+            "DATECREATED": "2001-01-01",
+            "PROFILE_IMAGE": null,
+            "LAST_IP": "127.0.0.1",
+            "LAST_LOGIN": "2021-12-22",
+            "LAST_ACTIVITY": "2021-12-22",
+            "LAST_PASSWORD_CHANGE": null,
+            "NEW_PASS_KEY": null,
+            "NEW_PASS_KEY_REQUESTED": null,
+            "ADMIN": 1,
+            "ROLE": null,
+            "ACTIVE": 1,
+            "DEFAULT_LANGUAGE": null,
+            "DIRECTION": null,
+            "MEDIA_PATH_SLUG": null,
+            "IS_NOT_STAFF": 0,
+            "HOURLY_RATE": "0.00",
+            "TWO_FACTOR_AUTH_ENABLED": "0",
+            "TWO_FACTOR_AUTH_CODE": null,
+            "TWO_FACTOR_AUTH_CODE_REQUESTED": null,
+            "EMAIL_SIGNATURE": null,
+            "LAST_LOGIN_TIME": "09:39:43",
+            "LAST_ACTIVITY_TIME": "10:04:50",
+            "IS_DELETED": 0,
+            "LAST_ACTIVE_TIME": 1640173142
+        }
+    ],
+    "messages": {
+        "success": "Keys from table"
+    }
+
+}
+
+### Data from table (with field key)
+
+> Information, parameters: tables/data-by/table/field/id
+http://localhost:89/dev/radApi/public/v1/tables/data-by/TBLSTAFF/STAFFID/2
+
+
 ## Congratulations
 
 - CodeIgniter 4: https://github.com/codeigniter4/CodeIgniter4
