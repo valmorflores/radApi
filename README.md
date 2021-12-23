@@ -149,7 +149,7 @@ Result:
 
 }
 
-### Keys ans indexes from table
+### Keys and indexes from table
 
 http://localhost:89/dev/radApi/public/v1/tables/keys/TBLSTAFF
 
