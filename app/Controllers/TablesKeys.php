@@ -36,7 +36,6 @@ class TablesKeys extends ResourceController
             $list[]=$info;
         }
         $data = [];
-        
         $data = $list;
         $resp = $data;
         $response = [
