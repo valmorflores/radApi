@@ -67,7 +67,7 @@ class TablesData extends ResourceController
             'error'    => null,
             'data'     => $resp,
             'messages' => [
-                'success' => 'Keys from table'
+                'success' => 'Data from table record by key field'
                 ]
             ];
         return $this->respond($response);
