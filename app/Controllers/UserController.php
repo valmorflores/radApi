@@ -26,7 +26,7 @@ class UserController extends ResourceController {
             'error'    => null,
             'data'     => $resp,
             'messages' => [
-                'success' => 'List of tables',
+                'success' => 'Login',
                 'email' => $email,
                 'password' => password_hash( $password, PASSWORD_ARGON2I )
                 ]
