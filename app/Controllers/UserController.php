@@ -28,7 +28,7 @@ class UserController extends ResourceController {
             'messages' => [
                 'success' => 'List of tables',
                 'email' => $email,
-                'password' => $password
+                'password' => password_hash( $password, PASSWORD_ARGON2I )
                 ]
             ];
         return $this->respond($response);
