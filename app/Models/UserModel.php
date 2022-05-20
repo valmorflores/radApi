@@ -11,10 +11,17 @@ class UserModel extends Model
     protected $primaryKey = 'ID';
     protected $returnType = 'array';
  
-    public function getLogin($userEmail){
-        $query   = $this->db->query('SELECT * FROM TBLUSER WHERE EMAIL = ' . "' . $userEmail . '");
+    public function getLogin($userEmail,$password){
+        $query   = $this->db->query("SELECT * FROM TBLUSER WHERE EMAIL = '" . $userEmail . "'");
         $results = $query->getResult();
-        return $results;
+        $finallist = [];
+        foreach ($results as $row)
+        {            
+            $finallist[] = $row;
+        }          
+        $data = [];        
+        $data = $finallist;
+        return $data;
       // return $this->UserModel->find($userName);
     }
 
