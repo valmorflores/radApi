@@ -7,8 +7,15 @@ This is a Api tool for accelerate integrations building.
 - Copy files to app folder
 - Install Firebird connection files (if you need firebird database support)
 - Configure database $default variable (Config/Database.php)
+- Configure Config/Filters.php
+- For security os access options, change configurations in Filters/FilterBasicAuth.php
 
 ## Examples 
+
+### For login, if use authentication
+
+http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&password=1234
+
 
 ### List of tables, from database
 

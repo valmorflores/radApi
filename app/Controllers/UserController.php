@@ -20,18 +20,55 @@ class UserController extends ResourceController {
         $this->UserModel = new UserModel();
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
-        $resp = $this->UserModel->getLogin($email,$password);        
-        $response = [
-            'status'   => 200,
-            'error'    => null,
-            'data'     => $resp,
-            'messages' => [
-                'success' => 'Login',
-                'email' => $email,
-                'password' => password_hash( $password, PASSWORD_ARGON2I )
-                ]
-            ];
-        return $this->respond($response);
+        // Stage 1 - User validation
+        $resp = $this->UserModel->getLogin($email,$password);
+        if (count($resp)<1){
+            $responseCode = 404;
+            $response = [
+                'status'   => $responseCode,
+                'token'    => '',
+                'verify'   => false,
+                'error'    => 'Unknow user records',
+                'data'     => [],
+                'messages' => []
+                ];
+            return $this->respond($response,$responseCode);
+        }
+        // Stage 2 - Password validation
+        $passwordFromRequest = password_hash( $password, PASSWORD_ARGON2I );
+        $passwordFromBase = $resp[0]->PASSWORD ?? '';
+        $verifyOk = password_verify( $password, $passwordFromBase);
+        $responseCode = 200;
+        if ($verifyOk) {
+            // Build or get token
+            $token = substr( strtoupper( password_hash( $password, PASSWORD_ARGON2I ) ), 29 );
+            $responseCode = 200;
+            $response = [
+                'status'   => $responseCode,
+                'token' => $token,
+                'verify'   => $verifyOk,
+                'from_base' => $passwordFromBase,
+                'from_request' => $passwordFromRequest,
+                'error'    => null,
+                'data'     => $resp,
+                'messages' => [
+                    'success' => 'Login',
+                    'email' => $email,
+                    'password' => $passwordFromRequest
+                    ]
+                ];
+        } else {
+            $responseCode = 403;
+            $response = [
+                'status'   => $responseCode,
+                'token'    => '',
+                'verify'   => $verifyOk,
+                'error'    => 'Invalid password information',
+                'data'     => [],
+                'messages' => []
+                ];
+        }
+        return $this->respond($response,$responseCode);
     }
 
 }
