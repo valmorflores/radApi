@@ -32,4 +32,26 @@ class TableDataModel extends Model
         return $results;
     }
 
+    public function postToTable($table,$data){
+        $sql = 'INSERT INTO ' . $table . ' ( ';
+        $separator = '';
+        $fields = '';
+        foreach( $data as $key => $row ) {
+            if ( strpos( $fields, $key . ' ') <= 0 ) {
+                $fields = $fields . $separator . $key . ' ';
+                $separator = ',';
+            }
+        }
+        $separator = '';
+        $values = '';
+        foreach( $data as $key => $row ) {
+            $values = $values . $separator . $this->db->escape( $row );
+            $separator = ',';
+        }
+        $sql = $sql . $fields . ') VALUES (' . $values . ')';
+        $query   = $this->db->query($sql);
+        //var_dump($sql);die;
+        return true; 
+     }
+
 }
