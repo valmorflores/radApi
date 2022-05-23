@@ -7,7 +7,11 @@ use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\RESTful\ResourceController;
+use CodeIgniter\API\ResponseTrait;
 use Psr\Log\LoggerInterface;
+use App\Models\TokenModel;
+use App\Models\TokenObjModel;
 
 /**
  * Class BaseController
@@ -37,6 +41,9 @@ class BaseController extends Controller
      */
     protected $helpers = [];
 
+    private $utils;
+    private $staffid;
+
     /**
      * Constructor.
      */
@@ -49,4 +56,53 @@ class BaseController extends Controller
 
         // E.g.: $this->session = \Config\Services::session();
     }
+
+    public function __construct(){
+        $this->staffid = null;
+    }
+
+    function loadAuthorization($request){
+        $auth = new UserController();
+        $data = $request->getHeaders();
+        $token = trim($data['Authorization']);
+        if (strpos(' ' . $token,'Bearer') > 0){
+            $token = trim(substr($token,strpos(' ' . $token,'Bearer')+6));
+        }
+        $this->TokenModel = new TokenModel();
+        $resp = $this->TokenModel->getDataFromToken($token);
+        $tokenObj = new TokenObjModel();
+        $tokenObj->setToken($token);
+        if (!($this->TokenModel->exists($tokenObj))){
+            $responseCode = 404;
+            $response = [
+                'status' => $responseCode,
+                'token' => $token,
+                'error' => 'Token not found',
+                'error_status' => 1,
+                'data' => [],
+                'messages' => []
+                ];
+            return $response;
+        }
+        if (!($this->TokenModel->isValid($tokenObj))){
+            $responseCode = 403;
+            $response = [
+                'status' => $responseCode,
+                'token' => $token,
+                'error' => 'Token found, but expirated',
+                'error_status' => 1,
+                'data' => [],
+                'messages' => []
+                ];                
+            return $response;
+        }
+        return true;
+    }
+
+    public function getStaffId(){
+        return $this->staffid;
+    }
+
+
+
 }

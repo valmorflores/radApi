@@ -6,6 +6,10 @@ use App\Models\ClientsModel;
 use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
+use Exception;
+use \Firebase\JWT\JWT;
+use App\Models\TokenObjModel;
+use App\Models\TokenModel;
 
 class UserController extends ResourceController {    
 
@@ -40,8 +44,17 @@ class UserController extends ResourceController {
         $verifyOk = password_verify( $password, $passwordFromBase);
         $responseCode = 200;
         if ($verifyOk) {
+            $token = $this->getToken($resp);
+            // Set tokenObj
+            $tokenObj = new TokenObjModel();
+            $tokenObj->setId(0);
+            $tokenObj->setToken($token);
+            $tokenObj->setUserId($resp[0]->STAFFID);
+            $tokenObj->setRefresh_token($token);
+            $tokenObj->setExpired_at('06-15-2022');
+            $this->TokenModel = new TokenModel();
+            $this->TokenModel->saveToken( $tokenObj );
             // Build or get token
-            $token = substr( strtoupper( password_hash( $password, PASSWORD_ARGON2I ) ), 29 );
             $responseCode = 200;
             $response = [
                 'status'   => $responseCode,
@@ -69,6 +82,30 @@ class UserController extends ResourceController {
                 ];
         }
         return $this->respond($response,$responseCode);
+    }
+
+    private function getKey()
+    {
+        return "br*1234567890";
+    }
+
+    private function getToken($resp) {
+        $key = $this->getKey();
+        $iat = time(); // current timestamp value
+        $nbf = $iat + 10;
+        $exp = $iat + 3600;
+        $payload = array(
+            "uid" => $resp[0]->STAFFID,
+            "iss" => "The_claim",
+            "aud" => "The_Aud",
+            "iat" => $iat, // issued at
+            "nbf" => $nbf, //not before in seconds
+            "exp" => $exp, // expire time in seconds
+            "data" => $resp[0]->EMAIL,
+        );
+        // JWT generator
+        $token = JWT::encode($payload, $key, 'HS256');
+        return $token;    
     }
 
 }

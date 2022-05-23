@@ -4,6 +4,7 @@ namespace App\Controllers;
 use App\Models\ClientsModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
+use App\Controllers\BaseController;
 
 class Tables extends ResourceController
 {
@@ -27,14 +28,26 @@ class Tables extends ResourceController
     }
  
     public function tableList() {
-        $db2 = \Config\Database::connect('default');
-        $tables = $db2->listTables();
-        return $tables;
+        $info = new BaseController();
+        $loadResult = $info->loadAuthorization($this->request);
+        if (isset($loadResult['error_status'])){
+            // Error from load (unknow authorization data)
+            return $loadResult;
+        }
+        else
+        {
+            $db2 = \Config\Database::connect('default');
+            $tables = $db2->listTables();
+            return $tables;
+        }
     }
 
     // List of tables
     public function list() {
         $tables = $this->tableList();
+        if (isset($tables['error_status'])){
+            return $this->respond($tables);
+        }
         $finalcolumns = [];
         foreach ($tables as $row)
         {
