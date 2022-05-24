@@ -245,9 +245,7 @@ Result:
 
 ### Boas práticas (útil para o desenvolvimento)
 
-Documentação extraída do link: https://desenvolvimentoparaweb.com/miscelanea/api-restful-melhores-praticas-parte-1/
-
-Escrito por "Tárcio Zemel" (obrigado)
+Documentação em artigo escrito por "Tárcio Zemel" extraído em maio/2022 do seguinte link https://desenvolvimentoparaweb.com/miscelanea/api-restful-melhores-praticas-parte-1/
 
 Filtragem
 
@@ -276,4 +274,4 @@ Combinando tudo isso, é possível construir queries como:
 
 - CodeIgniter 4: https://github.com/codeigniter4/CodeIgniter4
 - Firebird connection: https://github.com/leirags/CI4-PDO-Firebird
-
+- Tárcio Zemel (artigo: Melhores práticas para uma API RESTful pragmática (parte 1))
