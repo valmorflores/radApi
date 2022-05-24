@@ -34,24 +34,29 @@ class TableDataModel extends Model
         return $results;
     }
 
+    /**
+     * postToTable : insert information into database
+     * @param table name of table
+     * @param data  information array ['fieldname'=>'data','fieldname2'=>'data2']
+     */
     public function postToTable($table,$data){
         $sql = 'INSERT INTO ' . $table . ' ( ';
         $separator = '';
         $fields = '';
         foreach( $data as $key => $row ) {
             if ( strpos( $fields, $key . ' ') <= 0 ) {
-                $this->allowedFields[] = $key;
-                $fields = $fields . $separator . $key . ' ';
+                $this->allowedFields[] = $row;
+                $fields = trim($fields) . $separator . ' ' . $key . ' ';
                 $separator = ',';
             }
         }
         $separator = '';
         $values = '';
         foreach( $data as $key => $row ) {
-            $values = $values . $separator . $this->db->escape( $row );
+            $values = trim( $values ) . $separator . ' ' . $this->db->escape( $row );
             $separator = ',';
         }
-        $sql = $sql . $fields . ') VALUES (' . $values . ')';
+        $sql = $sql . $fields . ') VALUES ( ' . $values . ' )';
         $query   = $this->db->query($sql);
         return true; 
     }

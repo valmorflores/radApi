@@ -32,10 +32,18 @@ class TablesDataInsert extends ResourceController
         }
         else
         {
-            $dataFields = [ 'ROLEID' => 3,
-                       'NAME' => 'Support group' ];
-
-            $dataSet = $this->TableDataModel->postToTable($table, $dataFields);
+            $dataTableColumns = $this->getFields($table);
+            $dataFields = [];
+            foreach ($dataTableColumns as $row) {
+                $dataFields[] = $row['name'];
+            }
+            // List for fields (NAME=>'Name',ID=1,...)
+            $dataFieldsAndInfo = [];
+            foreach ($dataFields as $row) {
+                $key = $row;
+                $dataFieldsAndInfo[ $key ] = $_POST[$row] ?? '' ;
+            }
+            $dataSet = $this->TableDataModel->postToTable($table, $dataFieldsAndInfo);
             $list=[];
             
             /*foreach ($dataSet as $row)
@@ -57,6 +65,22 @@ class TablesDataInsert extends ResourceController
                 ];
             return $this->respond($response);
         }
+    }
+
+    private function getFields($table_name){
+        $db2 = \Config\Database::connect('default');
+        $columns = $db2->getFieldData($table_name);
+        $tables = [];
+        $finalcolumns = [];
+        foreach ($columns as $col)
+        {
+            $info = array('name' => trim($col->name),
+                    'type' => trim($col->type),
+                    'size' => trim($col->max_length),
+                    'default' => trim($col->default));
+            $finalcolumns[]=$info;
+        }
+        return $finalcolumns;
     }
 
 }
