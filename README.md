@@ -243,6 +243,17 @@ Result:
 > - http://localhost:89/dev/radApi/public/v1/tables/data-by/TBLSTAFF/STAFFID/2
 
 
+### Post data to table
+
+Post with incremental ID, called ROLEID
+[POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID
+
+Can do send more data from url:
+[POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=Information&field=MoreData
+
+
+## Auxiliar documents
+
 ### Boas práticas (útil para o desenvolvimento)
 
 Documentação em artigo escrito por "Tárcio Zemel" extraído em maio/2022 do seguinte link https://desenvolvimentoparaweb.com/miscelanea/api-restful-melhores-praticas-parte-1/

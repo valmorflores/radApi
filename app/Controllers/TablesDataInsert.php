@@ -37,13 +37,19 @@ class TablesDataInsert extends ResourceController
             foreach ($dataTableColumns as $row) {
                 $dataFields[] = $row['name'];
             }
+            
+            
             // List for fields (NAME=>'Name',ID=1,...)
             $dataFieldsAndInfo = [];
             foreach ($dataFields as $row) {
                 $key = $row;
-                $dataFieldsAndInfo[ $key ] = $_POST[$row] ?? '' ;
+                $dataFieldsAndInfo[ $key ] = $this->request->getVar($row) ?? '' ;
             }
-            $dataSet = $this->TableDataModel->postToTable($table, $dataFieldsAndInfo);
+            
+            //Autoinc field (use get_next_id)
+            $autoinc = $this->request->getVar('autoinc') ?? '';
+
+            $dataSet = $this->TableDataModel->postToTable($table, $dataFieldsAndInfo, $autoinc);
             $list=[];
             
             /*foreach ($dataSet as $row)
@@ -58,7 +64,8 @@ class TablesDataInsert extends ResourceController
                 'parameter_table_name' => $table,
                 'status'   => 200,
                 'error'    => null,
-                'data'     => $dataFields,
+                'incremental' => $autoinc,
+                'data'     => $dataFieldsAndInfo,
                 'messages' => [
                     'success' => 'Saved data!'
                     ]

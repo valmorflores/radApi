@@ -39,7 +39,11 @@ class TableDataModel extends Model
      * @param table name of table
      * @param data  information array ['fieldname'=>'data','fieldname2'=>'data2']
      */
-    public function postToTable($table,$data){
+    public function postToTable($table, $data, $autoinc = ''){
+        // if autoinc, use this and get last record +1
+        if ($autoinc!=''){
+            $data[$autoinc] = $this->get_next_id($table, $autoinc);
+        }
         $sql = 'INSERT INTO ' . $table . ' ( ';
         $separator = '';
         $fields = '';
@@ -59,6 +63,20 @@ class TableDataModel extends Model
         $sql = $sql . $fields . ') VALUES ( ' . $values . ' )';
         $query   = $this->db->query($sql);
         return true; 
+    }
+
+    /* 
+    * get_next_id
+    *
+    */
+    private function get_next_id($table, $field){
+        $sql = 'SELECT MAX( ' . $field . ' )+1 AS ' . $field . ' FROM ' . $table;
+        $query = $this->db->query($sql);
+        $results = $query->getResult();
+        foreach($results as $row){
+            return $row->$field;
+        }
+        return 1;
     }
 
 }
