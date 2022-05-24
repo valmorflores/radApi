@@ -44,8 +44,8 @@ class TableDataModel extends Model
         $separator = '';
         $fields = '';
         foreach( $data as $key => $row ) {
-            if ( strpos( $fields, $key . ' ') <= 0 ) {
-                $this->allowedFields[] = $row;
+            if ( strpos( ' '.$fields, $key ) <= 0 ) {
+                $this->allowedFields[] = $key;
                 $fields = trim($fields) . $separator . ' ' . $key . ' ';
                 $separator = ',';
             }
