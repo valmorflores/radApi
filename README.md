@@ -245,11 +245,11 @@ Result:
 
 ### Post data to table
 
-Post with incremental ID, called ROLEID
-[POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID
+> Post with incremental ID, called ROLEID
+> [POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID
 
-Can do send more data from url:
-[POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=Information&field=MoreData
+> Can do send more data from url:
+> [POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=Information&field=MoreData
 
 
 ## Auxiliar documents
