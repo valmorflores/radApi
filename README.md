@@ -243,6 +243,37 @@ Result:
 > - http://localhost:89/dev/radApi/public/v1/tables/data-by/TBLSTAFF/STAFFID/2
 
 
+### Boas práticas 
+
+Documentação extraída do link: https://desenvolvimentoparaweb.com/miscelanea/api-restful-melhores-praticas-parte-1/
+
+Escrito por "Tárcio Zemel" (obrigado)
+
+Filtragem
+
+Para filtragem, usa-se um parâmetro de consulta exclusivo para cada campo que implementa a filtragem. Por exemplo, ao solicitar uma lista de bilhetes a partir do endpoint /tickets, pode-se querer limitar o resultado para apenas aqueles no estado “aberto” (open). Isto poderia ser conseguido com um pedido GET /tickets?state=open, no qual state é um parâmetro de consulta que implementa um filtro.
+Ordenação
+
+Similarmente à filtragem, um parâmetro genérico sort pode ser usado para descrever regras de ordenação, permitindo requisitos complexos de ordenação deixando este parâmetro em classificações em que cada campo é separado por vírgula, cada um com um possível unário negativo para indicar ordem descendente. Por exemplo:
+
+    GET /tickets?sort=-priority Retorna uma lista de bilhetes em ordem descendente de prioridade
+    GET /tickets?sort=-priority,created_at Retorna uma lista de bilhetes em ordem descendente de prioridade com uma prioridade específica de bilhetes antigos primeiro
+
+Busca
+
+Às vezes filtros básicos não são suficientes e é necessário o poder de buscar textos completos (full text search) — talvez você já esteja usando ElasticSearch ou alguma outra tecnologia de busca baseada em Lucene. Quando pesquisa de texto completo é usado como um mecanismo de recuperação de instâncias de recursos para um tipo específico de recurso, ela pode ser exposta na API como um parâmetro de consulta no nó de extremidade do recurso. Considerando q, as consultas de pesquisa devem ser passados diretamente para o motor de busca e o retorno da API deve ser no mesmo formato, como resultado normal em lista.
+
+Combinando tudo isso, é possível construir queries como:
+
+    GET /tickets?sort=-updated_at Retorna bilhetes recém-atualizados
+    GET /tickets?state=closed&sort=-updated_at Retorna bilhetes recém-fechados
+    GET /tickets?q=return&state=open&sort=-priority,created_at Retorna bilhetes abertos de alta prioridade que contenham o termo “return”
+
+
+
+
+
+
 ## Congratulations
 
 - CodeIgniter 4: https://github.com/codeigniter4/CodeIgniter4

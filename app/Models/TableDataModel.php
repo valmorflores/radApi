@@ -7,6 +7,8 @@ use CodeIgniter\Model;
 class TableDataModel extends Model
 {
  
+    protected $allowedFields;
+
     public function getFromTable($table, $offset = 0, $limit = 0){
         $builder = $this->db->table($table);
         if ( ($offset + $limit ) == 0 ) {
@@ -38,6 +40,7 @@ class TableDataModel extends Model
         $fields = '';
         foreach( $data as $key => $row ) {
             if ( strpos( $fields, $key . ' ') <= 0 ) {
+                $this->allowedFields[] = $key;
                 $fields = $fields . $separator . $key . ' ';
                 $separator = ',';
             }
@@ -50,8 +53,7 @@ class TableDataModel extends Model
         }
         $sql = $sql . $fields . ') VALUES (' . $values . ')';
         $query   = $this->db->query($sql);
-        //var_dump($sql);die;
         return true; 
-     }
+    }
 
 }
