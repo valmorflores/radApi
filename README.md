@@ -243,7 +243,7 @@ Result:
 > - http://localhost:89/dev/radApi/public/v1/tables/data-by/TBLSTAFF/STAFFID/2
 
 
-### Boas práticas 
+### Boas práticas (útil para o desenvolvimento)
 
 Documentação extraída do link: https://desenvolvimentoparaweb.com/miscelanea/api-restful-melhores-praticas-parte-1/
 
@@ -268,8 +268,6 @@ Combinando tudo isso, é possível construir queries como:
     GET /tickets?sort=-updated_at Retorna bilhetes recém-atualizados
     GET /tickets?state=closed&sort=-updated_at Retorna bilhetes recém-fechados
     GET /tickets?q=return&state=open&sort=-priority,created_at Retorna bilhetes abertos de alta prioridade que contenham o termo “return”
-
-
 
 
 
