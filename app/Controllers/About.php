@@ -45,10 +45,10 @@ class About extends ResourceController
 
     public function index()
     {
-        $data['appname'] = $this->appname();
-        $data['apptitle'] = $this->apptitle();
-        $data['people'] = $this->people();
+        $data['app'] = $this->appname();
         $data['version'] = $this->version();
+        $data['title'] = $this->apptitle();
+        $data['people'] = $this->people();
         $data['changelog'] = $this->changelog();
         $data['resource'] = '/about';
         $response= $data;
