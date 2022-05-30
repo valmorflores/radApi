@@ -49,7 +49,7 @@ class UserController extends ResourceController {
             $tokenObj = new TokenObjModel();
             $tokenObj->setId(0);
             $tokenObj->setToken($token);
-            $tokenObj->setUserId($resp[0]->STAFFID);
+            $tokenObj->setUserId($resp[0]->STAFFID ?? 0);
             $tokenObj->setRefresh_token($token);
             $tokenObj->setExpired_at('06-15-2022');
             $this->TokenModel = new TokenModel();
