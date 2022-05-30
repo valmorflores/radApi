@@ -19,15 +19,15 @@ class About extends ResourceController
     }
 
     public function version(){        
-        return $this->changelog()[1][0];
+        return $this->changelog()[1]['version'];
     }
 
     public function changelog(){
         $changelog = [];
-        $changelog[] = ['', 'Maio/2022', ''];
-        $changelog[] = ['v1.0.02', 'Post', 'Suporte para post em tabela, via comando URL similar a este: [POST] /radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=item2'];
-        $changelog[] = ['v1.0.01', 'Get', 'Selecionar dados de uma tabela: [GET] /radApi/public/v1/tables/data/TBLROLES'];
-        $changelog[] = ['v1.0.00', 'Lançamento', 'Inicio do log sobre a ferramenta radApi'];
+        $changelog[] = ['title'=>'Maio/2022'];
+        $changelog[] = ['version'=>'v1.0.02', 'module'=>'Post', 'description'=>'Suporte para post em tabela, via comando URL similar a este: [POST] /radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=item2'];
+        $changelog[] = ['version'=>'v1.0.01', 'module'=>'Get', 'description'=>'Selecionar dados de uma tabela: [GET] /radApi/public/v1/tables/data/TBLROLES'];
+        $changelog[] = ['version'=>'v1.0.00', 'module'=>'Lançamento', 'description'=>'Inicio do log sobre a ferramenta radApi'];
         return $changelog;
     }
 
@@ -41,7 +41,12 @@ class About extends ResourceController
 
     public function people(){
         $people = [];
-        $people[] = [0,'Analista de Projetos', 'Projeto e desenvolvimento', 'Valmor Pereira Flores'];        
+        $people[] = [
+            'id' => 0,
+            'area' => 'Analista de Projetos', 
+            'function' => 'Projeto e desenvolvimento', 
+            'name' => 'Valmor Pereira Flores'
+        ]; 
         return $people;
     }
 

@@ -1,12 +1,11 @@
 {
-    "name": "codeigniter4/appstarter",
+    "name": "codeigniter4/codeigniter4",
     "type": "project",
     "description": "The CodeIgniter framework v4",
     "homepage": "https://codeigniter.com",
     "license": "MIT",
     "require": {
         "php": "^7.3 || ^8.0",
-        "codeigniter4/framework": "^4",
         "ext-curl": "*",
         "ext-intl": "*",
         "ext-json": "*",
