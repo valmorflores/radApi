@@ -16,6 +16,54 @@ This is a Api tool for accelerate integrations building.
 
 http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&password=1234
 
+### MySQl Database.php ###
+
+    public $default = [
+        'DSN'      => 'mysqli:host=localhost;dbname=pls_base',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '10101010',
+        'database' => 'pls_base',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => (ENVIRONMENT !== 'production'),
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port'     => '',
+    ];
+
+
+### Firebird Database.php ###
+
+
+    public $default = [
+            'DSN'      => '',
+            'hostname' => 'localhost',
+            'username' => 'SYSDBA',
+            'password' => 'masterkey',
+            'database' => '/dados/base_cosems_teste1.gdb',
+            'DBDriver' => 'Firebird',
+            'DBPrefix' => '',
+            'pConnect' => false,
+            'DBDebug'  => (ENVIRONMENT !== 'production'),
+            'charset'  => 'utf8',
+            'DBCollat' => 'utf8_general_ci',
+            'swapPre'  => '',
+            'encrypt'  => false,
+            'compress' => false,
+            'strictOn' => false,
+            'failover' => [],
+            'port'     => '',
+        ];
+
+
+
 
 ### List of tables, from database
 
