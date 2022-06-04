@@ -18,7 +18,6 @@ http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&passwor
 
 ### MySQl Database.php ###
 
-``
     public $default = [
         'DSN'      => 'mysqli:host=localhost;dbname=pls_base',
         'hostname' => 'localhost',
@@ -38,11 +37,11 @@ http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&passwor
         'failover' => [],
         'port'     => '',
     ];
-``
+
 
 ### Firebird Database.php ###
 
-``
+
     public $default = [
             'DSN'      => '',
             'hostname' => 'localhost',
@@ -62,7 +61,7 @@ http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&passwor
             'failover' => [],
             'port'     => '',
         ];
-``
+
 
 
 
