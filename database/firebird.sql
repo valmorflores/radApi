@@ -98,6 +98,7 @@ ALTER TABLE TBLPAPER
 -- TBLUSERKEY: login via key --
 CREATE TABLE TBLUSERKEY (
   USERKEYID                         INTEGER NOT NULL,
+  USERID                            INTEGER,
   STAFFID                           INTEGER,
   TOKEN_ID                          VARCHAR(100),
   KEYVALUE                          VARCHAR(8),
