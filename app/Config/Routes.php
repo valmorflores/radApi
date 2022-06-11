@@ -46,7 +46,8 @@ $routes->setAutoRoute(true);
     $routes->get('tables/data/(:any)', 'TablesData::getdata/$1/0/0');
     $routes->get('tables/data/(:any)/(:any)/(:any)', 'TablesData::getdata/$1/$2/$3');
     $routes->post('tables/data/(:any)', 'TablesDataInsert::postdata/$1');
-    $routes->get('about', 'About::index');
+    $routes->DELETE('tables/data/delete/(:any)/(:any)/(:any)', 'TablesDataDelete::deletedata/$1/$2/$3');
+	$routes->get('about', 'About::index');
 });
  
  
