@@ -33,7 +33,11 @@ class TableDataModel extends Model
         $results = $query->getResult();
         return $results;
     }
-
+    public function deleterecords($table, $field, $id){
+        $builder = $this->db->table($table);
+        $builder->where($field, $id);
+        $builder->delete();
+        return true;
     /**
      * postToTable : insert information into database
      * @param table name of table
