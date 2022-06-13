@@ -1,0 +1,1 @@
+curl -X GET -H 'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxIiwiaXNzIjoiVGhlX2NsYWltIiwiYXVkIjoiVGhlX0F1ZCIsImlhdCI6MTY1NTEyMzgzOSwibmJmIjoxNjU1MTIzODQ5LCJleHAiOjE2NTUxMjc0MzksImRhdGEiOiJ2YWxtb3JmbG9yZXNAZ21haWwuY29tIn0.6WJsYYv9IF9aIL76ovzOdAFOYK3bjtma6DMvSNSPkZs' -i "http://localhost/dev/radApi/public/v1/tables" 
