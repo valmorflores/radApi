@@ -113,3 +113,24 @@ CREATE TABLE TBLUSERKEYHISTORY (
   LASTUSED                          TIMESTAMP 
 );  
   
+CREATE TABLE TBLPREVIEW (
+  ID                                INTEGER,
+  NAME                              VARCHAR(255),
+  PARAMETERS                        BLOB segment 4096, subtype TEXT, 
+  SCRIPT_SQL                        BLOB segment 4096, subtype TEXT, 
+  PERMISSIONID                      INTEGER
+)
+
+CREATE TABLE TBLPREPROC (
+  ID                                INTEGER,
+  NAME                              VARCHAR(255),
+  PARAMETERS                        BLOB segment 4096, subtype TEXT, 
+  SCRIPT_SQL                        BLOB segment 4096, subtype TEXT, 
+  PERMISSIONID                      INTEGER
+)
+
+CREATE TABLE TBLPERMISSION (
+  PERMISSIONID                      INTEGER,
+  DESCRIPTION                       VARCHAR(64),
+)
+
