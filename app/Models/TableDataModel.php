@@ -68,6 +68,21 @@ class TableDataModel extends Model
         $query   = $this->db->query($sql);
         return true; 
     }
+	public function PutInTable($table, $data, $keyid){
+       
+               $sql = 'UPDATE ' . $table . ' SET ';
+        $separator = '';
+
+        foreach( $data as $key => $row ) {
+                $sql = $sql .$separator .' '. $key . ' = "'. $row.'" ';
+                $separator = ',';
+        }
+
+        $sql = $sql . 'WHERE '.$keyidname.' = '.$keyid;
+
+        $query   = $this->db->query($sql);
+        return true;
+    }
 
     /* 
     * get_next_id
