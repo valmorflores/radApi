@@ -44,6 +44,7 @@ $routes->setAutoRoute(true);
     $routes->get('tables/search/(:any)', 'Tables::search/$1');
     $routes->get('tables/data-by/(:any)/(:any)/(:any)', 'TablesData::getdataby/$1/$2/$3');
     $routes->get('tables/data/(:any)', 'TablesData::getdata/$1/0/0');
+	$routes->get('tables/count/(:any)', 'TablesData::getdatacount/$1/0/0');
     $routes->get('tables/data/(:any)/(:any)/(:any)', 'TablesData::getdata/$1/$2/$3');
     $routes->post('tables/data/(:any)', 'TablesDataInsert::postdata/$1');
     $routes->DELETE('tables/data/delete/(:any)/(:any)/(:any)', 'TablesDataDelete::deletedata/$1/$2/$3');
