@@ -296,9 +296,43 @@ Result:
 > Post with incremental ID, called ROLEID
 > [POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID
 
-> Can do send more data from url:
+> Can send more data from url:
 > [POST] http://localhost:89/dev/radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=Information&field=MoreData
 
+### DELETE data to table
+> [DELETE] http://localhost:89/dev/radApi/public/v1/tables/data/delete/TBLUSER/ID/2
+
+Result:
+{
+"parameter_table_name": "TBLUSER",
+"parameter_field": "ID",
+"parameter_data": "3",
+"status": 200,
+"error": null,
+"data": [],
+"messages": {
+"success": "Data deleted"
+}
+}
+
+### PUT data on table
+### fill key with camp name from your table
+> [PUT] http://localhost:89/dev/radApi/public/v1/tables/data/TBLUSER?key=ID&ID=4&NAME=test8&PASSWORD=6655
+
+Result:
+{
+"parameter_table_name": "TBLUSER",
+"status": 200,
+"error": null,
+"data": {
+"ID": "4",
+"NAME": "test8",
+"PASSWORD": "6655"
+},
+"messages": {
+"success": "Saved data!"
+}
+}
 
 ## Auxiliar documents
 
