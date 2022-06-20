@@ -22,7 +22,7 @@ class TablesData extends ResourceController
     }
 
     // getData $path/v1/tables/data/TBLOPTIONS
-    public function getdata($table = null, $offset, $records) {
+    public function getdata($table = '', $offset = 0, $records = 0) {
 
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
@@ -57,7 +57,7 @@ class TablesData extends ResourceController
             return $this->respond($response);
         }
     }
-    public function getdatacount($table = null, $offset, $records) {
+    public function getdatacount($table = '', $offset = 1, $records = 0) {
 
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
@@ -86,7 +86,7 @@ class TablesData extends ResourceController
         }
     }
     // getDataBy like: $path/v1/tables/data-by/TBLOPTIONS/ID/84
-    public function getdataby($table = null, $field, $information) {
+    public function getdataby($table = null, $field = 1, $information = '') {
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
         if (isset($loadResult['error_status'])){

@@ -15,6 +15,7 @@ class TableDataModel extends Model
         
 		return $builder;
     }
+
 	public function getFromTable($table, $offset = 0, $limit = 0){
         $builder = $this->db->table($table);
         if ( ($offset + $limit ) == 0 ) {
@@ -34,16 +35,19 @@ class TableDataModel extends Model
         return $results;
     }
 
-    public function getFromQuery($query)
+    public function getFromQuery($query){
         $query   = $this->db->query($query);
         $results = $query->getResult();
         return $results;
     }
+    
     public function deleterecords($table, $field, $id){
         $builder = $this->db->table($table);
         $builder->where($field, $id);
         $builder->delete();
         return true;
+    }
+
     /**
      * postToTable : insert information into database
      * @param table name of table
@@ -74,6 +78,7 @@ class TableDataModel extends Model
         $query   = $this->db->query($sql);
         return true; 
     }
+    
 	public function PutInTable($table, $data, $keyid){
        
                $sql = 'UPDATE ' . $table . ' SET ';
