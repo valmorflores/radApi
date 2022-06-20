@@ -303,17 +303,23 @@ Result:
 > [DELETE] http://localhost:89/dev/radApi/public/v1/tables/data/delete/TBLUSER/ID/2
 
 Result:
+
 {
-"parameter_table_name": "TBLUSER",
-"parameter_field": "ID",
-"parameter_data": "3",
-"status": 200,
-"error": null,
-"data": [],
-"messages": {
-"success": "Data deleted"
+
+    "parameter_table_name": "TBLUSER",
+    "status": 200,
+    "error": null,
+    "data": [
+        {
+           
+        }
+    ],
+    "messages": {
+        "success": "Data deleted"
+    }
+
 }
-}
+
 
 ### PUT data on table
 ### fill key with field name from your table
@@ -335,17 +341,23 @@ Result:
 }
 ### Count records from Table
 > [GET] http://localhost:89/dev/radApi/public/v1/tables/count/TBLUSER
+
+Result:
+
 {
-"parameter_table_name": "TBLUSER",
-"parameter_offset": "0",
-"parameter_records": "0",
-"status": 200,
-"error": null,
-"data": 6,
-"messages": {
-"success": "There are 6 records in this table"
+
+    "parameter_table_name": "TBLUSER",
+    "parameter_offset": "0",
+    "parameter_records": "0",
+	"status": 200,
+    "error": null,
+    "data": [{6}],
+    "messages": {
+        "success": "There are 6 records in this table"
+    }
+
 }
-}
+
 ## Auxiliar documents
 
 ### Boas práticas (útil para o desenvolvimento)
