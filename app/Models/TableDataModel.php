@@ -9,7 +9,7 @@ class TableDataModel extends Model
  
     protected $allowedFields;
 
-    public function CountTable($table){
+    public function countTable($table){
        $builder = $this->db->table($table);
        $builder = $builder->countAll();
         
@@ -33,6 +33,17 @@ class TableDataModel extends Model
         $query = $builder->get();        
         $results = $query->getResult();
         return $results;
+    }
+	public function getPreviewExecute($table, $information){
+        $builder = $this->db->table($table);
+        $builder->where(array('name' => $information));
+        $query = $builder->get();
+        $results = $query->getResult();
+        $sql = $results[0]->SCRIPT_SQL;
+        $query = $this->db->query($sql);
+        $results = $query->getResult();
+        return $results;
+
     }
 
     public function getFromQuery($query){
@@ -79,7 +90,7 @@ class TableDataModel extends Model
         return true; 
     }
     
-	public function PutInTable($table, $data, $keyid){
+	public function putInTable($table, $data, $keyid){
        
                $sql = 'UPDATE ' . $table . ' SET ';
         $separator = '';
