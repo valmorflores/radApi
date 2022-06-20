@@ -9,7 +9,13 @@ class TableDataModel extends Model
  
     protected $allowedFields;
 
-    public function getFromTable($table, $offset = 0, $limit = 0){
+    public function CountTable($table){
+       $builder = $this->db->table($table);
+       $builder = $builder->countAll();
+        
+		return $builder;
+    }
+	public function getFromTable($table, $offset = 0, $limit = 0){
         $builder = $this->db->table($table);
         if ( ($offset + $limit ) == 0 ) {
             $query = $builder->get();//$this->db->query('SELECT * FROM ' . $table);        
@@ -28,7 +34,7 @@ class TableDataModel extends Model
         return $results;
     }
 
-    public function getFromQuery($query){
+    public function getFromQuery($query)
         $query   = $this->db->query($query);
         $results = $query->getResult();
         return $results;

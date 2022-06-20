@@ -67,26 +67,19 @@ class TablesData extends ResourceController
         }
         else
         {
-            $dataSet = $this->TableDataModel->getFromTable($table, $offset, $records);
-            $list=[];
+            $dataSet = $this->TableDataModel->CountTable($table, $offset, $records);
 
-            foreach ($dataSet as $row)
-            {
-                $info = $row;
-                $list[]=$info;
-            }
-            $data = [];
-            $data = $list;
-            $resp = $data;
+
+            $resp = $dataSet;
             $response = [
                 'parameter_table_name' => $table,
                 'parameter_offset' => $offset,
                 'parameter_records' => $records,
                 'status'   => 200,
                 'error'    => null,
-                'data'     => count($resp),
+                'data'     => $resp,
                 'messages' => [
-                    'success' => 'There are ' . count($resp) . ' records in this table'
+                    'success' => 'There are ' . $resp . ' records in this table'
                     ]
                 ];
             return $this->respond($response);
