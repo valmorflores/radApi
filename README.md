@@ -316,7 +316,7 @@ Result:
 }
 
 ### PUT data on table
-### fill key with camp name from your table
+### fill key with field name from your table
 > [PUT] http://localhost:89/dev/radApi/public/v1/tables/data/TBLUSER?key=ID&ID=4&NAME=test8&PASSWORD=6655
 
 Result:
