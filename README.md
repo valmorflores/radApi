@@ -333,7 +333,19 @@ Result:
 "success": "Saved data!"
 }
 }
-
+### Count records from Table
+> [GET] http://localhost:89/dev/radApi/public/v1/tables/count/TBLUSER
+{
+"parameter_table_name": "TBLUSER",
+"parameter_offset": "0",
+"parameter_records": "0",
+"status": 200,
+"error": null,
+"data": 6,
+"messages": {
+"success": "There are 6 records in this table"
+}
+}
 ## Auxiliar documents
 
 ### Boas práticas (útil para o desenvolvimento)
