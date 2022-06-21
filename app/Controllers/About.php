@@ -24,6 +24,8 @@ class About extends ResourceController
 
     public function changelog(){
         $changelog = [];
+        $changelog[] = ['title'=>'Junho/2022'];
+        $changelog[] = ['version'=>'v1.0.03', 'module'=>'Password', 'description'=>'Suporte para senhas em Php sem Argon2i'];
         $changelog[] = ['title'=>'Maio/2022'];
         $changelog[] = ['version'=>'v1.0.02', 'module'=>'Post', 'description'=>'Suporte para post em tabela, via comando URL similar a este: [POST] /radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=item2'];
         $changelog[] = ['version'=>'v1.0.01', 'module'=>'Get', 'description'=>'Selecionar dados de uma tabela: [GET] /radApi/public/v1/tables/data/TBLROLES'];
@@ -58,6 +60,12 @@ class About extends ResourceController
         $data['people'] = $this->people();
         $data['changelog'] = $this->changelog();
         $data['resource'] = '/about';
+        $password = '0';
+        if(defined('PASSWORD_ARGON2ID')) {
+            $data['pwd_argon'] = password_hash( $password, PASSWORD_ARGON2I );
+        } 
+        $data['pwd_default'] = password_hash( $password, PASSWORD_DEFAULT, 
+              array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6) );        
         $response= $data;
         return $this->respond($response);
     }

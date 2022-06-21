@@ -39,7 +39,12 @@ class UserController extends ResourceController {
             return $this->respond($response,$responseCode);
         }
         // Stage 2 - Password validation
-        $passwordFromRequest = password_hash( $password, PASSWORD_ARGON2I );
+        if(defined('PASSWORD_ARGON2ID')) {
+            $passwordFromRequest = password_hash( $password, PASSWORD_ARGON2I );
+        } else {
+            $passwordFromRequest = password_hash( $password, PASSWORD_DEFAULT, 
+                 array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6) );
+        }
         $passwordFromBase = $resp[0]->PASSWORD ?? '';
         $verifyOk = password_verify( $password, $passwordFromBase);
         $responseCode = 200;
