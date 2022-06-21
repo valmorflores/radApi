@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class ProcessModel extends Model
+class PreviewModel extends Model
 {
  
     protected $allowedFields;

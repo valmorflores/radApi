@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\ClientsModel;
-use App\Models\TableDataModel;
+use App\Models\PreviewModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
@@ -16,8 +15,7 @@ class Preview extends ResourceController
     // Create a shared instance of the model
     public function __construct()
     {
-        $this->ClientsModel = new ClientsModel();
-        $this->TableDataModel = new TableDataModel();
+        $this->PreviewModel = new PreviewModel();
         $this->session = session();
     }
 
