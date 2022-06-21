@@ -22,7 +22,7 @@ class TablesPreview extends ResourceController
     }
 
 
-     public function getpreview($table = null, $information) {
+     public function getpreview($information) {
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
         if (isset($loadResult['error_status'])){
@@ -32,7 +32,7 @@ class TablesPreview extends ResourceController
         else
         {
 
-            $dataSet = $this->TableDataModel->getPreviewExecute($table, $information);
+            $dataSet = $this->TableDataModel->getPreviewExecute($information);
             $list=[];
             foreach ($dataSet as $row)
             {
@@ -43,7 +43,7 @@ class TablesPreview extends ResourceController
             $data = $list;
             $resp = $data;
             $response = [
-                'parameter_table_name' => $table,
+              //  'parameter_table_name' => $table,
               //  'parameter_field' => $field,
                 'parameter_data' => $information,
                 'status'   => 200,
