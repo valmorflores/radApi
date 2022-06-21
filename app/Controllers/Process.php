@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\ClientsModel;
-use App\Models\TableDataModel;
+use App\Models\ProcessModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
 
-class TablesPreview extends ResourceController
+class Process extends ResourceController
 {
     use ResponseTrait;
 
@@ -16,17 +15,11 @@ class TablesPreview extends ResourceController
     // Create a shared instance of the model
     public function __construct()
     {
-        $this->ClientsModel = new ClientsModel();
-        $this->TableDataModel = new TableDataModel();
+        $this->ProcessModel = new ProcessModel();
         $this->session = session();
     }
 
-
-
-     public function getpreview($information) {
-
-     public function getpreview($table = null, $information = '') {
-
+    public function postprocess($table = null, $information = '') {
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
         if (isset($loadResult['error_status'])){
@@ -35,31 +28,25 @@ class TablesPreview extends ResourceController
         }
         else
         {
-
-            $dataSet = $this->TableDataModel->getPreviewExecute($information);
-            $list=[];
-            foreach ($dataSet as $row)
-            {
-                $info = $row;
-                $list[]=$info;
-            }
+            $dataSet = $this->ProcessModel->postProcessExecute($table, $information);
+            $list=[];            
             $data = [];
             $data = $list;
-            $resp = $data;
+            $resp = $dataSet;
             $response = [
-              //  'parameter_table_name' => $table,
+                'parameter_table_name' => $table,
               //  'parameter_field' => $field,
                 'parameter_data' => $information,
                 'status'   => 200,
                 'error'    => null,
                 'data'     => $resp,
                 'messages' => [
-                    'success' => 'Data from table record by key field'
+                    'success' => 'Process data information'
                     ]
                 ];
             return $this->respond($response);
         }
-     }
+    }
 }
 
 ?>
