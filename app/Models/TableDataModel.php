@@ -34,18 +34,7 @@ class TableDataModel extends Model
         $results = $query->getResult();
         return $results;
     }
-	public function getPreviewExecute($information){
-        $builder = $this->db->table('TBLPREVIEW');
-        $builder->where(array('name' => $information));
-        $query = $builder->get();
-        $results = $query->getResult();
-        $sql = $results[0]->SCRIPT_SQL;
-        $query = $this->db->query($sql);
-        $results = $query->getResult();
-        return $results;
-
-    }
-
+	
     public function getFromQuery($query){
         $query   = $this->db->query($query);
         $results = $query->getResult();

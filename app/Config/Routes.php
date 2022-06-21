@@ -46,7 +46,7 @@ $routes->setAutoRoute(true);
     $routes->get('tables/data/(:any)', 'TablesData::getdata/$1/0/0');
 	$routes->get('tables/count/(:any)', 'TablesData::getdatacount/$1/0/0');
     $routes->get('tables/data/(:any)/(:any)/(:any)', 'TablesData::getdata/$1/$2/$3');
-	$routes->get('tables/preview/(:any)/(:any)', 'TablesPreview::getpreview/$1/$2:');
+	$routes->get('preview/(:any)/(:any)', 'Preview::getpreview/$1/$2:');
     $routes->post('tables/data/(:any)', 'TablesDataInsert::postdata/$1');
     $routes->DELETE('tables/data/delete/(:any)/(:any)/(:any)', 'TablesDataDelete::deletedata/$1/$2/$3');
 	$routes->put('tables/data/(:any)/', 'TablesDataUpdate::updatedata/$1');

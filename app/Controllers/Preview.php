@@ -7,7 +7,7 @@ use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
 
-class TablesPreview extends ResourceController
+class Preview extends ResourceController
 {
     use ResponseTrait;
 
@@ -36,7 +36,7 @@ class TablesPreview extends ResourceController
         else
         {
 
-            $dataSet = $this->TableDataModel->getPreviewExecute($information);
+            $dataSet = $this->PreviewModel->getPreviewExecute($information);
             $list=[];
             foreach ($dataSet as $row)
             {
