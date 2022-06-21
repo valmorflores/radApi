@@ -23,9 +23,9 @@ class Preview extends ResourceController
 
 
 
-     public function getpreview($information) {
+     
 
-     public function getpreview($table = null, $information = '') {
+     public function getpreview($information) {
 
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
