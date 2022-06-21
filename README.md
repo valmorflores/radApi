@@ -385,10 +385,9 @@ Combinando tudo isso, é possível construir queries como:
     GET /tickets?q=return&state=open&sort=-priority,created_at Retorna bilhetes abertos de alta prioridade que contenham o termo “return”
 
 
-
-
 ## Congratulations
 
 - CodeIgniter 4: https://github.com/codeigniter4/CodeIgniter4
 - Firebird connection: https://github.com/leirags/CI4-PDO-Firebird
 - Tárcio Zemel (artigo: Melhores práticas para uma API RESTful pragmática (parte 1))
+
