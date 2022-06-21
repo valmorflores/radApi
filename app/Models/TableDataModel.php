@@ -79,7 +79,7 @@ class TableDataModel extends Model
         return true; 
     }
     
-	public function putInTable($table, $data, $keyid){
+	public function putInTable($table, $data, $keyid, $keyidname){
        
                $sql = 'UPDATE ' . $table . ' SET ';
         $separator = '';
