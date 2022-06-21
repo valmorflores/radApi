@@ -358,6 +358,28 @@ Result:
 
 }
 
+### Process 
+
+Run process defined in TBLPREPROC with post parameters
+
+> [POST] http://localhost:89/dev/radApi/public/v1/process/{nameofprocess}/{listOfParamters}
+
+Note: Parameter start whitout /?, like /?parameter1=1, use like this: /parameter1=1
+
+Examples:
+
+> [POST] http://localhost:89/dev/radApi/public/v1/process/buy/idProduct=1&idClient=1&idRoom=2&qty=200000&price=1&idBook=0
+
+> TBLPREPROC (SCRIPT_SQL = 'INSERT INTO table_book (
+idProduct,idClient,idRoom,qty,price,idBook,buySell ) VALUES (
+:idProduct:, :idClient:, :idRoom:, :qty:, :price:, :idBook:, 'B'
+);
+
+Fields are changed for parameters values. 
+If the process script doesn´t have parameters, send 0 like this
+> [POST] http://localhost:89/dev/radApi/public/v1/process/nameofprocess/0
+
+
 ## Auxiliar documents
 
 ### Boas práticas (útil para o desenvolvimento)

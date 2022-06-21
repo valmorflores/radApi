@@ -50,7 +50,8 @@ $routes->setAutoRoute(true);
     $routes->post('tables/data/(:any)', 'TablesDataInsert::postdata/$1');
     $routes->DELETE('tables/data/delete/(:any)/(:any)/(:any)', 'TablesDataDelete::deletedata/$1/$2/$3');
 	$routes->put('tables/data/(:any)/', 'TablesDataUpdate::updatedata/$1');
-	$routes->get('about', 'About::index');
+	$routes->post('process/(:any)/(:any)', 'Process::postprocess/$1/$2');
+    $routes->get('about', 'About::index');
 });
  
  
