@@ -930,7 +930,7 @@ abstract class BaseConnection implements ConnectionInterface
      */
     public function getConnectDuration(int $decimals = 6): string
     {
-        return number_format($this->connectDuration, $decimals);
+        return number_format($this->connectDuration ?? 0, $decimals);
     }
 
     /**

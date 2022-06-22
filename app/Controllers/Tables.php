@@ -30,7 +30,7 @@ class Tables extends ResourceController
     public function tableList() {
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
-        if (isset($loadResult['error_status'])){
+        if (isset($loadResult['error_status']) && ($loadResult['error_status'] > 0)){
             // Error from load (unknow authorization data)
             return $loadResult;
         }
@@ -46,7 +46,7 @@ class Tables extends ResourceController
     public function list() {
         $tables = $this->tableList();
         if (isset($tables['error_status'])){            
-            return $this->respond($tables, $tables['status']);
+            return $this->respond($tables, $tables['status'] ?? 200);
         }
         $finalcolumns = [];
         foreach ($tables as $row)
