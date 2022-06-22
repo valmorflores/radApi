@@ -64,6 +64,18 @@ class BaseController extends Controller
     function loadAuthorization($request){
         $auth = new UserController();
         $data = $request->getHeaders();
+        if (!isset($data['Authorization'])){
+            $responseCode = 403;
+            $response = [
+                'status' => $responseCode,
+                'token' => '',
+                'error' => 'Forbidden: Authorization headers not found',
+                'error_status' => 1,
+                'data' => [],
+                'messages' => []
+                ];
+            return $response;
+        }
         $token = trim($data['Authorization']);
         if (strpos(' ' . $token,'Bearer') > 0){
             $token = trim(substr($token,strpos(' ' . $token,'Bearer')+6));
