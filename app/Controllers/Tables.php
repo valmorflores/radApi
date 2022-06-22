@@ -45,8 +45,8 @@ class Tables extends ResourceController
     // List of tables
     public function list() {
         $tables = $this->tableList();
-        if (isset($tables['error_status'])){
-            return $this->respond($tables);
+        if (isset($tables['error_status'])){            
+            return $this->respond($tables, $tables['status']);
         }
         $finalcolumns = [];
         foreach ($tables as $row)
