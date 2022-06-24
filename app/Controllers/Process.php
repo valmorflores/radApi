@@ -34,7 +34,7 @@ class Process extends ResourceController
             $data = $list;
             $resp = $dataSet;
             $response = [
-                'parameter_table_name' => $table,
+                'parameter_process_name' => $table,
               //  'parameter_field' => $field,
                 'parameter_data' => $information,
                 'status'   => 200,
