@@ -6,6 +6,7 @@ This is a Api tool for accelerate integrations building.
 - Get and install codeigniter 4
 - Copy files to app folder
 - Install Firebird connection files (if you need firebird database support)
+- Create database Firebird.sql, MySql.sql or other
 - Configure database $default variable (Config/Database.php)
 - Configure Config/Filters.php
 - For security os access options, change configurations in Filters/FilterBasicAuth.php
