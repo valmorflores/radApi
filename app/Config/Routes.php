@@ -34,7 +34,8 @@ $routes->setAutoRoute(true);
  //$routes->resource('tables');
  $routes->group('v1', function ($routes) {
     $routes->post('user/login', 'UserController::login'); 
-    $routes->post('user/keylogin', 'UserController::keylogin'); 
+    $routes->post('user/keylogin', 'UserController::keylogin');
+    $routes->post('user/add', 'UserController::postAddUser');
     $routes->get('users', 'APIUser::index');
     $routes->get('users/(:any)', 'APIUser::getUserByUsername/$1');
     $routes->get('tables', 'Tables::list');

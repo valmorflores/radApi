@@ -89,6 +89,59 @@ class UserController extends ResourceController {
         return $this->respond($response,$responseCode);
     }
 
+    function postAddUser() {
+        // only authrized
+        $info = new BaseController();
+        $loadResult = $info->loadAuthorization($this->request);
+        if (isset($loadResult['error_status'])){
+            // Error from load (unknow authorization data)
+            return $this->respond($loadResult);
+        }
+        else
+        {    
+            $email = $this->request->getVar('email');
+            $password = $this->request->getVar('password');
+            $this->UserModel = new UserModel();
+            if ($this->UserModel->emailExists($email)){
+                $responseCode = 409;
+                $response = [
+                    'status'   => $responseCode,
+                    'token'    => '',
+                    'verify'   => false,
+                    'error'    => 'Conflict, already exists user e-mail',
+                    'data'     => [],
+                    'messages' => []
+                    ];
+                return $this->respond($response,$responseCode);
+            } 
+            // Stage 1 - Create hash password
+            $passwordHash = '';
+            if(defined('PASSWORD_ARGON2ID')) {
+                $passwordHash = password_hash( $password, PASSWORD_ARGON2I );
+            } else {
+                $passwordHash = password_hash( $password, PASSWORD_DEFAULT, 
+                    array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6) );
+            }
+            $name = $this->request->getVar('name');
+            $this->UserModel->postAddUserLogin($name,$email,$passwordHash);
+            $resp = $this->UserModel->getLogin($email,$password);
+            // Build or get token
+            $responseCode = 200;
+            $response = [
+                'status'   => $responseCode,
+                'hash'     => $passwordHash,
+                'error'    => null,
+                'data'     => $resp,
+                'messages' => [
+                    'success' => 'Login',
+                    'email' => $email,
+                     
+                    ]
+                ];
+            return $this->respond($response,$responseCode);
+        }        
+    }
+
     private function getKey()
     {
         return "br*1234567890";
