@@ -9,7 +9,8 @@ CREATE TABLE TBLUSER (
     PASSWORD                        VARCHAR(255),
     REMEMBER_TOKEN                  VARCHAR(100),
     CREATED_AT                      TIMESTAMP,
-    UPDATED_AT                      TIMESTAMP
+    UPDATED_AT                      TIMESTAMP,
+    DELETED_AT                      TIMESTAMP DEFAULT NULL
 );
 
 CREATE TABLE TBLUSERTOKEN (
