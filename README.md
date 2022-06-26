@@ -381,6 +381,25 @@ If the process script doesn´t have parameters, send 0 like this
 > [POST] http://localhost:89/dev/radApi/public/v1/process/nameofprocess/0
 
 
+## User administration
+
+Can user add and delete  
+
+> [POST] http://localhost:89/dev/radApi/public/v1/user/?name=name&email=email@email.com&password=123  
+> 
+
+For delete is need id and email 
+
+> [DELETE] http://localhost:89/dev/radApi/public/v1/user/?email@email.com&id=123  
+> 
+
+For get user data is need email
+
+> [GET] http://localhost:89/dev/radApi/public/v1/user/?email@email.com&id=123  
+> 
+
+
+
 ## Auxiliar documents
 
 ### Boas práticas (útil para o desenvolvimento)
