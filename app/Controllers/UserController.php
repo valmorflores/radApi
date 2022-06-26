@@ -124,7 +124,7 @@ class UserController extends ResourceController {
             }
             $name = $this->request->getVar('name');
             $this->UserModel->postAddUserLogin($name,$email,$passwordHash);
-            $resp = $this->UserModel->getLogin($email,$password);
+            $resp = $this->UserModel->getUser($email);
             // Build or get token
             $responseCode = 200;
             $response = [
@@ -142,7 +142,7 @@ class UserController extends ResourceController {
         }        
     }
 
-    public function deleteUser($id, $email) {
+    public function deleteUser() {
         // only authrized
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
@@ -154,24 +154,88 @@ class UserController extends ResourceController {
         {    
             $this->UserModel = new UserModel();
             $email = $this->request->getVar('email');
-            $password = $this->request->getVar('password');
+            $id = $this->request->getVar('id');
             if (!$this->UserModel->emailExists($email)){
                 $responseCode = 404;
                 $response = [
                     'status'   => $responseCode,
                     'token'    => '',
                     'verify'   => false,
-                    'error'    => 'Unknow ser e-mail',
+                    'error'    => 'Unknow user e-mail',
                     'data'     => [],
                     'messages' => []
                     ];
                 return $this->respond($response,$responseCode);
             } else {
+                if (!$this->UserModel->userExists($id, $email)) { 
+                    $responseCode = 404;
+                    $response = [
+                        'status'   => $responseCode,
+                        'token'    => '',
+                        'verify'   => false,
+                        'error'    => 'Unknow this user e-mail with this id',
+                        'data'     => [],
+                        'messages' => []
+                        ];
+                    return $this->respond($response,$responseCode);
+                } else {
+                    $this->UserModel->deleteUser($id, $email);
+                    $responseCode = 200;
+                    $response = [
+                        'status'   => $responseCode,
+                        'error'    => null,
+                        'data'     => ['id' => $id,
+                                    'email' => $email],
+                        'messages' => [
+                            'success' => 'Successful delete record',                        
+                            ]
+                        ];
+                    return $this->respond($response,$responseCode);
+                }
                 
-            }        
+            }
         }
     }
 
+    public function getUser() {
+        // only authrized
+        $info = new BaseController();
+        $loadResult = $info->loadAuthorization($this->request);
+        if (isset($loadResult['error_status'])){
+            // Error from load (unknow authorization data)
+            return $this->respond($loadResult);
+        }
+        else
+        {    
+            $this->UserModel = new UserModel();
+            $email = $this->request->getVar('email');
+            if (!$this->UserModel->emailExists($email)){
+                $responseCode = 404;
+                $response = [
+                    'status'   => $responseCode,
+                    'email'    => $email,
+                    'verify'   => false,
+                    'error'    => 'Unknow user e-mail',
+                    'data'     => [],
+                    'messages' => []
+                    ];
+                return $this->respond($response,$responseCode);
+            } else {
+                $data = $this->UserModel->getUser($email);
+                $responseCode = 200;
+                $response = [
+                    'status'   => $responseCode,
+                    'error'    => null,
+                    'data'     => $data,
+                    'messages' => [
+                        'success' => 'Successful get user record',
+                        ]
+                    ];
+                return $this->respond($response,$responseCode);
+            }
+        }
+    }
+   
     private function getKey()
     {
         return "br*1234567890";

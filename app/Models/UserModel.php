@@ -12,7 +12,10 @@ class UserModel extends Model
     protected $returnType = 'array';
  
     public function getLogin($userEmail,$password){
-        $query   = $this->db->query("SELECT * FROM TBLUSER WHERE EMAIL = '" . $userEmail . "'");
+        $query   = $this->db->query(
+            "SELECT * FROM TBLUSER " . 
+            " WHERE EMAIL = " . $this->db->escpae($userEmail) . 
+            " AND DELETED_AT IS NULL ");
         $results = $query->getResult();
         $finallist = [];
         foreach ($results as $row)
@@ -70,10 +73,26 @@ class UserModel extends Model
     }
 
     public function emailExists($userEmail){
-        $query   = $this->db->query(
-            "SELECT TBLUSER.* " . 
-            " FROM TBLUSER" .
-            " WHERE EMAIL = '" . $userEmail . "'");
+        $sql = "SELECT TBLUSER.* " . 
+        " FROM TBLUSER" .
+        " WHERE EMAIL = " . $this->db->escape($userEmail) .
+        " AND DELETED_AT IS NULL ";
+        $query = $this->db->query($sql);
+        $results = $query->getResult();        
+        $finallist = [];
+        foreach ($results as $row)
+        {            
+            $finallist[] = $row;
+        }          
+        $data = [];        
+        $data = $finallist;
+        
+        return count($data)>0;       
+    }
+
+    public function getUser($userEmail){
+        $query   = $this->db->query("SELECT * FROM TBLUSER WHERE EMAIL = " . 
+             $this->db->escape($userEmail) . " AND DELETED_AT IS NULL ");
         $results = $query->getResult();
         $finallist = [];
         foreach ($results as $row)
@@ -82,6 +101,35 @@ class UserModel extends Model
         }          
         $data = [];        
         $data = $finallist;
-        return count($data)>0;       
+        return $data;
     }
+
+    public function deleteUser($id, $email){
+        $query   = $this->db->query(
+            "UPDATE  " . 
+            " TBLUSER" .
+            " SET DELETED_AT = CURRENT_TIMESTAMP() ". 
+            " WHERE ID = " . $id . " AND EMAIL = " . $this->db->escape( $email ) );
+        return true;
+    }
+
+    public function userExists($userId, $userEmail){
+        $sql = "SELECT TBLUSER.* " . 
+        " FROM TBLUSER" .
+        " WHERE EMAIL = " . $this->db->escape($userEmail) .
+        " AND DELETED_AT IS NULL " . 
+        " AND ID = " . $userId;
+        $query = $this->db->query($sql);
+        $results = $query->getResult();        
+        $finallist = [];
+        foreach ($results as $row)
+        {            
+            $finallist[] = $row;
+        }          
+        $data = [];        
+        $data = $finallist;
+        return count($data)>0;
+    }
+    
+
 }
