@@ -390,12 +390,12 @@ Can user add and delete
 
 For delete is need id and email 
 
-> [DELETE] http://localhost:89/dev/radApi/public/v1/user/?email@email.com&id=123  
+> [DELETE] http://localhost:89/dev/radApi/public/v1/user/?email=email@email.com&id=123  
 > 
 
 For get user data is need email
 
-> [GET] http://localhost:89/dev/radApi/public/v1/user/?email@email.com&id=123  
+> [GET] http://localhost:89/dev/radApi/public/v1/user/?email=email@email.com&id=123  
 > 
 
 
