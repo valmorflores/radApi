@@ -25,6 +25,7 @@ class About extends ResourceController
     public function changelog(){
         $changelog = [];
         $changelog[] = ['title'=>'Junho/2022'];
+        $changelog[] = ['version'=>'v1.0.04', 'module'=>'Users', 'description'=>'Add user endpoint'];
         $changelog[] = ['version'=>'v1.0.03', 'module'=>'Password', 'description'=>'Suporte para senhas em Php sem Argon2i'];
         $changelog[] = ['title'=>'Maio/2022'];
         $changelog[] = ['version'=>'v1.0.02', 'module'=>'Post', 'description'=>'Suporte para post em tabela, via comando URL similar a este: [POST] /radApi/public/v1/tables/data/TBLROLES?autoinc=ROLEID&NAME=item2'];

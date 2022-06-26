@@ -142,6 +142,36 @@ class UserController extends ResourceController {
         }        
     }
 
+    public function deleteUser($id, $email) {
+        // only authrized
+        $info = new BaseController();
+        $loadResult = $info->loadAuthorization($this->request);
+        if (isset($loadResult['error_status'])){
+            // Error from load (unknow authorization data)
+            return $this->respond($loadResult);
+        }
+        else
+        {    
+            $this->UserModel = new UserModel();
+            $email = $this->request->getVar('email');
+            $password = $this->request->getVar('password');
+            if (!$this->UserModel->emailExists($email)){
+                $responseCode = 404;
+                $response = [
+                    'status'   => $responseCode,
+                    'token'    => '',
+                    'verify'   => false,
+                    'error'    => 'Unknow ser e-mail',
+                    'data'     => [],
+                    'messages' => []
+                    ];
+                return $this->respond($response,$responseCode);
+            } else {
+                
+            }        
+        }
+    }
+
     private function getKey()
     {
         return "br*1234567890";

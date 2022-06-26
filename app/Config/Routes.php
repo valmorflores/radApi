@@ -36,6 +36,7 @@ $routes->setAutoRoute(true);
     $routes->post('user/login', 'UserController::login'); 
     $routes->post('user/keylogin', 'UserController::keylogin');
     $routes->post('user/add', 'UserController::postAddUser');
+    $routes->delete('user', 'UserController::deleteUser');
     $routes->get('users', 'APIUser::index');
     $routes->get('users/(:any)', 'APIUser::getUserByUsername/$1');
     $routes->get('tables', 'Tables::list');
