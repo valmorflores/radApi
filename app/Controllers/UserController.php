@@ -239,12 +239,12 @@ class UserController extends ResourceController {
     public function getUserActivateLink() {
         $email = $this->request->getVar('email');
         if (!(getenv('APP_KEY'))){
-           $responseCode = 403;
+           $responseCode = 500;
            $response = [
                'status'   => $responseCode,
                'email'    => $email,
                'verify'   => false,
-               'error'    => 'Forbidden service, unknow APP_KEY into server setup',
+               'error'    => 'Server side error: Unknow APP_KEY into server setup',
                'data'     => [],
                'messages' => []
                ];
