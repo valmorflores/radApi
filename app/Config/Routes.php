@@ -36,6 +36,7 @@ $routes->setAutoRoute(true);
     $routes->post('user/login', 'UserController::login'); 
     $routes->post('user/keylogin', 'UserController::keylogin');
     $routes->post('user/add', 'UserController::postAddUser');
+    $routes->patch('user/password', 'UserController::patchUserPassword');
     $routes->get('activation/link', 'UserController::getUserActivateLink');
     $routes->post('activation/now', 'UserController::postUserActivateNow');
     $routes->get('user/(:any)', 'UserController::getUser/$1');

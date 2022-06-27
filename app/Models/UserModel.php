@@ -122,6 +122,16 @@ class UserModel extends Model
         return $this->getUser($email);
     }
 
+    public function patchPassword($email,$passwordHash){
+        $query   = $this->db->query(
+            "UPDATE  " . 
+            " TBLUSER" .
+            " SET PASSWORD = " . $this->db->escape( $passwordHash ) . 
+           // " , UPDATED_AT = CURRENT_TIMESTAMP() ". 
+            " WHERE DELETED_AT IS NULL AND EMAIL = " . $this->db->escape( $email ) );
+        return $this->getUser($email);
+    }
+
     public function userExists($userId, $userEmail){
         $sql = "SELECT TBLUSER.* " . 
         " FROM TBLUSER" .

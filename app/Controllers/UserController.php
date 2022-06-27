@@ -240,9 +240,43 @@ class UserController extends ResourceController {
         return md5($data);
     }
    
-
-
-
+    public function patchUserPassword() {
+        // only authrized
+        $info = new BaseController();
+        $loadResult = $info->loadAuthorization($this->request);
+        if (isset($loadResult['error_status'])){
+            // Error from load (unknow authorization data)
+            return $this->respond($loadResult,403);
+        }
+        else
+        {
+            $email = $this->request->getVar('email');
+            $password = $this->request->getVar('password');
+            $passwordHash = '';
+            if(defined('PASSWORD_ARGON2ID')) {
+                $passwordHash = password_hash( $password, PASSWORD_ARGON2I );
+            } else {
+                $passwordHash = password_hash( $password, PASSWORD_DEFAULT, 
+                    array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6) );
+            }
+            $this->UserModel = new UserModel();
+            // Stage 1 - User validation
+            $resp = $this->UserModel->patchPassword($email,$passwordHash);
+            $data = ['email' => $email,
+                'password' => $passwordHash];
+            $responseCode = 200;
+            $response = [
+                'status'   => $responseCode,
+                'email'    => $email,
+                'verify'   => false,
+                'error'    => null,
+                'data'     => $data,
+                'messages' => ['Successfuly update user password']
+                ];
+            return $this->respond($response, $responseCode);
+        }
+    }
+    
     private function validateAppKey($appKey = '', $email = ''){
         // Default (has no error)
         $response = [
