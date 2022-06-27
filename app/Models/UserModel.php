@@ -14,7 +14,7 @@ class UserModel extends Model
     public function getLogin($userEmail,$password){
         $query   = $this->db->query(
             "SELECT * FROM TBLUSER " . 
-            " WHERE EMAIL = " . $this->db->escpae($userEmail) . 
+            " WHERE EMAIL = " . $this->db->escape($userEmail) . 
             " AND DELETED_AT IS NULL ");
         $results = $query->getResult();
         $finallist = [];
