@@ -19,43 +19,52 @@ class Preview extends ResourceController
         $this->session = session();
     }
 
+    public function getpreview($information) {
 
-
-     
-
-     public function getpreview($information) {
-
-        $info = new BaseController();
-        $loadResult = $info->loadAuthorization($this->request);
-        if (isset($loadResult['error_status'])){
-            // Error from load (unknow authorization data)
-            return $loadResult;
-        }
-        else
-        {
-
-            $dataSet = $this->PreviewModel->getPreviewExecute($information);
-            $list=[];
-            foreach ($dataSet as $row)
-            {
-                $info = $row;
-                $list[]=$info;
+        try {          
+            $info = new BaseController();
+            $loadResult = $info->loadAuthorization($this->request); 
+            if (isset($loadResult['error_status'])){
+                return $this->respond($loadResult,403);
             }
-            $data = [];
-            $data = $list;
-            $resp = $data;
+            else
+            {
+
+                $dataSet = $this->PreviewModel->getPreviewExecute($information);
+                $list=[];
+                foreach ($dataSet as $row)
+                {
+                    $info = $row;
+                    $list[]=$info;
+                }
+                $data = [];
+                $data = $list;
+                $resp = $data;
+                $response = [
+                //  'parameter_table_name' => $table,
+                //  'parameter_field' => $field,
+                    'parameter_data' => $information,
+                    'status'   => 200,
+                    'error'    => null,
+                    'data'     => $resp,
+                    'messages' => [
+                        'success' => 'Data from table record by key field'
+                        ]
+                    ];
+                return $this->respond($response);
+            }
+        } catch (\Exception $ex) {
+            $resp = [];
             $response = [
-              //  'parameter_table_name' => $table,
-              //  'parameter_field' => $field,
                 'parameter_data' => $information,
-                'status'   => 200,
-                'error'    => null,
-                'data'     => $resp,
+                'status'   => 500,
+                'error'    => 1,
+                'data'     => [],
                 'messages' => [
-                    'success' => 'Data from table record by key field'
+                    'success' => 'Unknow internal error: ' . $ex->getMessage()
                     ]
                 ];
-            return $this->respond($response);
+            return $this->respond($response,500);
         }
      }
 }

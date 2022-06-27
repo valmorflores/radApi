@@ -23,8 +23,7 @@ class Process extends ResourceController
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
         if (isset($loadResult['error_status'])){
-            // Error from load (unknow authorization data)
-            return $loadResult;
+            return $this->respond($loadResult,403);
         }
         else
         {
