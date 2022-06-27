@@ -236,6 +236,62 @@ class UserController extends ResourceController {
         }
     }
    
+    public function getUserActivateLink() {
+        $email = $this->request->getVar('email');
+        if (!(getenv('APP_KEY'))){
+           $responseCode = 403;
+           $response = [
+               'status'   => $responseCode,
+               'email'    => $email,
+               'verify'   => false,
+               'error'    => 'Forbidden service, unknow APP_KEY into server setup',
+               'data'     => [],
+               'messages' => []
+               ];
+           return $this->respond($response,$responseCode);
+        } else {
+            $key = $this->request->getVar('APP_KEY');
+            if (!isset($key)){
+                $responseCode = 403;
+                $response = [
+                    'status'   => $responseCode,
+                    'email'    => $email,
+                    'verify'   => false,
+                    'error'    => 'Forbidden service, need APP_KEY parameter',
+                    'data'     => [],
+                    'messages' => []
+                    ];
+                return $this->respond($response,$responseCode);
+            }
+            if (!($key==getenv('APP_KEY'))){
+                $responseCode = 403;
+                $response = [
+                    'status'   => $responseCode,
+                    'email'    => $email,
+                    'verify'   => false,
+                    'error'    => 'Forbidden service, invalid APP_KEY',
+                    'data'     => [],
+                    'messages' => []
+                    ];
+                return $this->respond($response,$responseCode);
+            }
+            $responseCode = 200;
+            $data = [
+                'email' => $email,
+                'link'  => base_url() . '/user/activate/now/',
+                'key'=> $key];
+            $response = [
+                'status'   => $responseCode,
+                'error'    => null,
+                'data'     => $data,
+                'messages' => [
+                    'success' => 'Successful get user activation link',
+                    ]
+                ];
+            return $this->respond($response,$responseCode);
+        }
+    }
+
     private function getKey()
     {
         return "br*1234567890";
