@@ -235,10 +235,31 @@ class UserController extends ResourceController {
             }
         }
     }
+
+    public function keyGen($data){
+        return md5($data);
+    }
    
-    public function getUserActivateLink() {
-        $email = $this->request->getVar('email');
-        if (!(getenv('APP_KEY'))){
+
+
+
+    private function validateAppKey($appKey = '', $email = ''){
+        // Default (has no error)
+        $response = [
+            'error'   => null,
+        ];
+        if (!($email)){
+            $responseCode = 500;
+            $response = [
+                'status'   => $responseCode,
+                'email'    => $email,
+                'verify'   => false,
+                'error'    => 'E-mail unknow',
+                'data'     => [],
+                'messages' => []
+                ];
+            return $response;
+        } else if (!(getenv('APP_KEY'))){
            $responseCode = 500;
            $response = [
                'status'   => $responseCode,
@@ -248,7 +269,7 @@ class UserController extends ResourceController {
                'data'     => [],
                'messages' => []
                ];
-           return $this->respond($response,$responseCode);
+           return $response;
         } else {
             $key = $this->request->getVar('APP_KEY');
             if (!isset($key)){
@@ -261,7 +282,7 @@ class UserController extends ResourceController {
                     'data'     => [],
                     'messages' => []
                     ];
-                return $this->respond($response,$responseCode);
+                return $response;
             }
             if (!($key==getenv('APP_KEY'))){
                 $responseCode = 403;
@@ -273,12 +294,30 @@ class UserController extends ResourceController {
                     'data'     => [],
                     'messages' => []
                     ];
-                return $this->respond($response,$responseCode);
+                return $response;
             }
+        }
+        return $response;
+    }
+
+    public function getUserActivateLink() {
+        $email = $this->request->getVar('email');
+        $key = $this->request->getVar('APP_KEY');
+        $validation = $this->validateAppKey($key, $email);
+        if ($validation['error']){
+           $responseCode = $validation['status'];
+           return $this->respond($validation,$responseCode);
+        }
+        else 
+        {
+            $date = new \DateTime('+1day') ; //'+1day OR +10min'
+            $expire = $date->getTimestamp();
+            $link = base_url() . '/activation/now?APP_KEY='.$key.'&email='.$email.'&expire=' . $expire;
+            $link = $link . '&validation=' . $this->keyGen($key . $email . $this->getKey() . $expire);
             $responseCode = 200;
             $data = [
                 'email' => $email,
-                'link'  => base_url() . '/user/activate/now/',
+                'link'  => $link,
                 'key'=> $key];
             $response = [
                 'status'   => $responseCode,
@@ -292,9 +331,67 @@ class UserController extends ResourceController {
         }
     }
 
-    private function getKey()
-    {
-        return "br*1234567890";
+    public function postUserActivateNow() {
+        $this->UserModel = new UserModel();
+        $key = '';
+        $responseCode = 500;
+        $response = [];
+        $email = $this->request->getVar('email');
+        $app_key = $this->request->getVar('APP_KEY');
+        $expire = $this->request->getVar('expire');
+        $validParams = $this->validateAppKey($key, $email);
+        if ($validParams['error']){
+           $responseCode = $validParams['status'];
+           return $this->respond($validParams,$responseCode);
+        }
+        else 
+        {
+            // valid $validation parameters?
+            $key = $this->keyGen($app_key . $email . $this->getKey() . $expire);
+            $validation = $this->request->getVar('validation');
+            if ($validation != $key){
+                $responseCode = 403;
+                $data = [
+                        'APP_KEY' => $app_key,
+                        'email' => $email,
+                        'validation' => $validation,
+                    'key'=>$key];
+                $response = [
+                            'status'   => $responseCode,
+                            'verify'   => false,
+                            'error'    => 'Invalid validation code',
+                            'data'     => $data,
+                            'messages' => []
+                            ];
+                return $this->respond($response,$responseCode);    
+            }
+            $date = new \DateTime();
+            $date_now = $date->getTimestamp();
+            $is_expired = ($date_now > $expire);
+            if ($is_expired){
+                $responseCode = 410;
+                $data = [];
+                $response = [
+                            'status'   => $responseCode,
+                            'verify'   => false,
+                            'error'    => 'Expirated link, please get a new activation',
+                            'data'     => $data,
+                            'messages' => []
+                            ];
+                return $this->respond($response,$responseCode);    
+            }
+            $internalKey = $this->getKey();
+            $responseCode = 200;
+            $data = $this->UserModel->activeUser($email);
+            $response = [
+                        'status'   => $responseCode,
+                        'error'    => null,
+                        'data'     => $data,
+                        'messages' => ['Successful activating user']
+                        ];
+            return $this->respond($response,$responseCode);
+        }
+        return $this->respond($response,$responseCode);
     }
 
     private function getToken($resp) {
@@ -384,6 +481,11 @@ class UserController extends ResourceController {
                 ];
         }
         return $this->respond($response,$responseCode);
+    }
+
+    private function getKey()
+    {
+        return "br*1234567890";
     }
 
 
