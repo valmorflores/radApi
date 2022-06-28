@@ -19,7 +19,7 @@ class Preview extends ResourceController
         $this->session = session();
     }
 
-    public function getpreview($information) {
+    public function getpreview($information,$parameters='0') {
 
         try {          
             $info = new BaseController();
@@ -29,8 +29,11 @@ class Preview extends ResourceController
             }
             else
             {
-
-                $dataSet = $this->PreviewModel->getPreviewExecute($information);
+                if ($parameters == '0'){
+                    $dataSet = $this->PreviewModel->getPreviewExecute($information);
+                } else {
+                    $dataSet = $this->PreviewModel->getPreviewExecute($information, $parameters);
+                }
                 $list=[];
                 foreach ($dataSet as $row)
                 {
