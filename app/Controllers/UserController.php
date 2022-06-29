@@ -29,7 +29,9 @@ class UserController extends ResourceController {
         if (count($resp)<1){
             $responseCode = 404;
             $response = [
-                'status'   => $responseCode,
+                'param_email' => $email,
+                'param_password' => $password,
+                'status'  => $responseCode,
                 'token'    => '',
                 'verify'   => false,
                 'error'    => 'Unknow user records',
