@@ -54,7 +54,7 @@ class TableDataModel extends Model
      * @param data  information array ['fieldname'=>'data','fieldname2'=>'data2']
      */
     public function postToTable($table, $data, $autoinc = ''){
-        // if autoinc, use this and get last record +1
+        // if autoinc, use this and get last record +1        
         if ($autoinc!=''){
             $data[$autoinc] = $this->get_next_id($table, $autoinc);
         }

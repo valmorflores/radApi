@@ -81,8 +81,8 @@ class TablesDataUpdate extends ResourceController
         {
             $info = array('name' => trim($col->name),
                     'type' => trim($col->type),
-                    'size' => trim($col->max_length),
-                    'default' => trim($col->default));
+                    'size' => $col->max_length,
+                    'default' => $col->default);
             $finalcolumns[]=$info;
         }
         return $finalcolumns;
