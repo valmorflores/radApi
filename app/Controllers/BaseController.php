@@ -76,10 +76,17 @@ class BaseController extends Controller
                 ];
             return $response;
         }
-        $token = trim($data['Authorization']);
+        $token = trim($data['Authorization']??'1');
+        // remove bearer
         if (strpos(' ' . $token,'Bearer') > 0){
             $token = trim(substr($token,strpos(' ' . $token,'Bearer')+6));
         }
+        // If authorization like app_key, authorized is true
+        // Todo: change by authorized list into database
+        if ( trim($token) == trim(getenv('APP_KEY') ?? '0') ){
+            return true;
+        }
+        
         $this->TokenModel = new TokenModel();
         $resp = $this->TokenModel->getDataFromToken($token);
         $tokenObj = new TokenObjModel();
