@@ -25,6 +25,8 @@ class About extends ResourceController
     public function changelog(){
         $url = base_url();
         $changelog = [];
+        $changelog[] = ['title'=>'Julho/2022'];
+        $changelog[] = ['version'=>'v1.0.07', 'module'=>'User', 'description'=>'Get user data from token [GET] '.$url.'/user/by-token/{token}'];
         $changelog[] = ['title'=>'Junho/2022'];
         $changelog[] = ['version'=>'v1.0.06', 'module'=>'Password', 'description'=>'Change password endpoint [PATCH] '.$url.'/user/password?email=valmorflores@gmail.com&password=123'];
         $changelog[] = ['version'=>'v1.0.05', 'module'=>'Activation', 'description'=>'Get activation link from e-mail [GET] '.$url.'/activation/link?APP_KEY=0123&email=valmorflores@gmail.com'];
