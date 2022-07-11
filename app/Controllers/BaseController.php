@@ -83,7 +83,7 @@ class BaseController extends Controller
         }
         // If authorization like app_key, authorized is true
         // Todo: change by authorized list into database
-        if ( trim($token) == trim(getenv('APP_KEY') ?? '0') ){
+        if ( trim($token) == trim(getenv('APP_KEY') ?? '007') ){
             return true;
         }
         
