@@ -39,6 +39,7 @@ $routes->setAutoRoute(true);
     $routes->patch('user/password', 'UserController::patchUserPassword');
     $routes->get('activation/link', 'UserController::getUserActivateLink');
     $routes->post('activation/now', 'UserController::postUserActivateNow');
+    $routes->get('user/by-token/(:any)', 'UserController::getUserByToken/$1');
     $routes->get('user/(:any)', 'UserController::getUser/$1');
     $routes->get('user', 'UserController::getUser/0');
     $routes->delete('user', 'UserController::deleteUser');

@@ -401,6 +401,43 @@ For get user data is need email
 > [GET] http://localhost:89/dev/radApi/public/v1/user/?email=email@email.com&id=123  
 > 
 
+## Get user data by token ##
+> [GET] http://localhost:89/dev/radApi/public/v1/user/by-token/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxIiwiaXNzIjoiVGhlX2NsYWltIiwiYXVkIjoiVGhlX0F1ZCIsImlhdCI6MTY1NzA1Mjk0NiwibmJmIjoxNjU3MDUyOTU2LCJleHAiOjE2NTcwNTY1NDYsImRhdGEiOiJ2YWxtb3JmbG9yZXNAZ21haWwuY29tIn0.-b6yf9IcM3LpFF7QaFahLEtVGjpD3YDjzgFS_z4-944
+
+You can use this for get user information and token validate. If this has empty or error results, like unknow token or is invalid token. 
+
+If ok, results like this:
+
+{
+    "status": 200,
+    "error": null,
+    "data": [
+        {
+            "ID": "1",
+            "USER_ID": "1",
+            "CLIENT_ID": "0",
+            "NAME": "valor",
+            "SCOPES": null,
+            "TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxIiwiaXNzIjoiVGhlX2NsYWltIiwiYXVkIjoiVGhlX0F1ZCIsImlhdCI6MTY1NzA1Mjk0NiwibmJmIjoxNjU3MDUyOTU2LCJleHAiOjE2NTcwNTY1NDYsImRhdGEiOiJ2YWxtb3JmbG9yZXNAZ21haWwuY29tIn0.-b6yf9IcM3LpFF7QaFahLEtVGjpD3YDjzgFS_z4-944",
+            "REFRESH_TOKEN": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1aWQiOiIxIiwiaXNzIjoiVGhlX2NsYWltIiwiYXVkIjoiVGhlX0F1ZCIsImlhdCI6MTY1NzA1Mjk0NiwibmJmIjoxNjU3MDUyOTU2LCJleHAiOjE2NTcwNTY1NDYsImRhdGEiOiJ2YWxtb3JmbG9yZXNAZ21haWwuY29tIn0.-b6yf9IcM3LpFF7QaFahLEtVGjpD3YDjzgFS_z4-944",
+            "REVOKED": "0",
+            "CREATED_AT": "2022-07-05 17:29:06",
+            "UPDATED_AT": "2022-07-05 17:29:06",
+            "EXPIRES_AT_DATE": "0000-00-00",
+            "EXPIRES_AT_TIME": null,
+            "STAFFID": "1",
+            "EMAIL": "valmorflores@gmail.com",
+            "EMAIL_VERIFIED_AT": "2022-06-27 11:18:33",
+            "REMEMBER_TOKEN": null,
+            "DELETED_AT": null,
+            "ACTIVATED_AT": "2022-06-27 10:32:15"
+        }
+    ],
+    "messages": {
+        "success": "Successful get user record"
+    }
+}
+
 
 
 ## Auxiliar documents

@@ -519,11 +519,49 @@ class UserController extends ResourceController {
         return $this->respond($response,$responseCode);
     }
 
+    public function getUserByToken($token = '') {
+        // only authrized
+        $info = new BaseController();
+        $loadResult = $info->loadAuthorization($this->request);
+        if (isset($loadResult['error_status'])){
+            // Error from load (unknow authorization data)
+            return $this->respond($loadResult);
+        }
+        else
+        {    
+            $this->UserModel = new UserModel();
+            $user = $this->UserModel->getUserByToken($token);
+            if (!$user){
+                $responseCode = 404;
+                $response = [
+                    'status'   => $responseCode,
+                    'token'    => $token,
+                    'verify'   => false,
+                    'error'    => 'Unknow user token',
+                    'data'     => [],
+                    'messages' => []
+                    ];
+                return $this->respond($response,$responseCode);
+            } else {
+                $data = $user;
+                $responseCode = 200;
+                $response = [
+                    'status'   => $responseCode,
+                    'error'    => null,
+                    'data'     => $data,
+                    'messages' => [
+                        'success' => 'Successful get user record',
+                        ]
+                    ];
+                return $this->respond($response,$responseCode);
+            }
+        }
+    }
+
     private function getKey()
     {
         return "br*1234567890";
     }
-
 
 
 }

@@ -70,7 +70,7 @@ class UserModel extends Model
         $data = [];        
         $data = $finallist;
         return $data;       
-    }
+    }    
 
     public function emailExists($userEmail){
         $sql = "SELECT TBLUSER.* " . 
@@ -149,6 +149,22 @@ class UserModel extends Model
         $data = $finallist;
         return count($data)>0;
     }
-    
+
+    public function getUserByToken($token){
+        $sql = "SELECT TBLUSERTOKEN.*, TBLUSER.* " . 
+            " FROM TBLUSERTOKEN" .
+            " LEFT OUTER JOIN TBLUSER ON TBLUSER.ID = TBLUSERTOKEN.USER_ID " .
+            " WHERE TBLUSERTOKEN.TOKEN = " . $this->db->escape($token); 
+        $query = $this->db->query($sql);
+        $results = $query->getResult();        
+        $finallist = [];
+        foreach ($results as $row)
+        {            
+            $finallist[] = $row;
+        }          
+        $data = [];        
+        $data = $finallist;
+        return $data;
+    }
 
 }
