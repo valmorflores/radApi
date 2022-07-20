@@ -13,6 +13,7 @@ This is a Api tool for accelerate integrations building.
 - Configure database $default variable (Config/Database.php)
 - Configure Config/Filters.php
 - For security os access options, change configurations in Filters/FilterBasicAuth.php
+- Configure radApi database and managed database
 
 ## Examples 
 
@@ -23,6 +24,26 @@ http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&passwor
 ### MySQl Database.php ###
 
     public $default = [
+        'DSN'      => 'mysqli:host=localhost;dbname=pls_base',
+        'hostname' => 'localhost',
+        'username' => 'root',
+        'password' => '10101010',
+        'database' => 'pls_base',
+        'DBDriver' => 'MySQLi',
+        'DBPrefix' => '',
+        'pConnect' => false,
+        'DBDebug'  => (ENVIRONMENT !== 'production'),
+        'charset'  => 'utf8',
+        'DBCollat' => 'utf8_general_ci',
+        'swapPre'  => '',
+        'encrypt'  => false,
+        'compress' => false,
+        'strictOn' => false,
+        'failover' => [],
+        'port'     => '',
+    ];
+    
+    public $radapi = [
         'DSN'      => 'mysqli:host=localhost;dbname=pls_base',
         'hostname' => 'localhost',
         'username' => 'root',
@@ -66,6 +87,26 @@ http://localhost:89/dev/radApi/public/v1/user/login?email=user@email.com&passwor
             'port'     => '',
         ];
 
+
+    public $radapi = [
+            'DSN'      => '',
+            'hostname' => 'localhost',
+            'username' => 'SYSDBA',
+            'password' => 'masterkey',
+            'database' => '/dados/base_cosems_teste1.gdb',
+            'DBDriver' => 'Firebird',
+            'DBPrefix' => '',
+            'pConnect' => false,
+            'DBDebug'  => (ENVIRONMENT !== 'production'),
+            'charset'  => 'utf8',
+            'DBCollat' => 'utf8_general_ci',
+            'swapPre'  => '',
+            'encrypt'  => false,
+            'compress' => false,
+            'strictOn' => false,
+            'failover' => [],
+            'port'     => '',
+        ];
 
 
 
