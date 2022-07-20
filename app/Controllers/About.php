@@ -36,6 +36,7 @@ class About extends ResourceController
         $url = base_url();
         $changelog = [];
         $changelog[] = ['title'=>'Julho/2022'];
+        $changelog[] = ['version'=>'v1.0.08', 'module'=>'Global', 'description'=>'One database (radapi application and other to do target managing)'];
         $changelog[] = ['version'=>'v1.0.07', 'module'=>'User', 'description'=>'Get user data from token [GET] '.$url.'/user/by-token/{token}'];
         $changelog[] = ['title'=>'Junho/2022'];
         $changelog[] = ['version'=>'v1.0.06', 'module'=>'Password', 'description'=>'Change password endpoint [PATCH] '.$url.'/user/password?email=valmorflores@gmail.com&password=123'];
@@ -63,8 +64,15 @@ class About extends ResourceController
             'id' => 0,
             'area' => 'Analista de Projetos', 
             'function' => 'Projeto e desenvolvimento', 
-            'name' => 'Valmor Pereira Flores'
+            'name' => 'Valmor Pereira Flores',
+            
         ]; 
+        $people[] = [
+            'id' => 1,
+            'area' => 'Desenvolvedor', 
+            'function' => 'Projeto e desenvolvimento', 
+            'name' => 'Marlei Rafael'
+        ];
         return $people;
     }
 
@@ -76,7 +84,7 @@ class About extends ResourceController
         $data['people'] = $this->people();
         $data['changelog'] = $this->changelog();
         $data['resource'] = '/about';
-        $data['table_list'] = $this->tables->internaltablelist();
+        $data['table_list'] = $this->tables->internaltablelist(getenv('APP_KEY'));
         $password = '0';
         if(defined('PASSWORD_ARGON2ID')) {
             $data['pwd_argon'] = password_hash( $password, PASSWORD_ARGON2I );

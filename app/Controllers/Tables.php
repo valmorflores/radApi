@@ -43,10 +43,14 @@ class Tables extends ResourceController
     }
 
     // internal, don´t required authorization 
-    public function internaltablelist() {
-        $db2 = \Config\Database::connect('default');
-        $tables = $db2->listTables();
-        return $tables;
+    public function internaltablelist($appkey = null) {
+        if ($appkey==getenv('APP_KEY')){
+            $db2 = \Config\Database::connect('default');
+            $tables = $db2->listTables();
+            return $tables;
+        } else { 
+            return false;
+        }
     }
 
     // List of tables
