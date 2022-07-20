@@ -22,28 +22,42 @@ class Process extends ResourceController
     public function postprocess($table = null, $information = '') {
         $info = new BaseController();
         $loadResult = $info->loadAuthorization($this->request);
-        if (isset($loadResult['error_status'])){
-            return $this->respond($loadResult,403);
-        }
-        else
-        {
-            $dataSet = $this->ProcessModel->postProcessExecute($table, $information);
-            $list=[];            
-            $data = [];
-            $data = $list;
-            $resp = $dataSet;
+        try {
+            if (isset($loadResult['error_status'])){
+                return $this->respond($loadResult,403);
+            }
+            else
+            {
+                $dataSet = $this->ProcessModel->postProcessExecute($table, $information);
+                $list=[];            
+                $data = [];
+                $data = $list;
+                $resp = $dataSet;
+                $response = [
+                    'parameter_process_name' => $table,
+                //  'parameter_field' => $field,
+                    'parameter_data' => $information,
+                    'status'   => 200,
+                    'error'    => null,
+                    'data'     => $resp,
+                    'messages' => [
+                        'success' => 'Process data information'
+                        ]
+                    ];
+                return $this->respond($response);
+            }
+        } catch (\Exception $ex) {
+            $resp = [];
             $response = [
-                'parameter_process_name' => $table,
-              //  'parameter_field' => $field,
                 'parameter_data' => $information,
-                'status'   => 200,
-                'error'    => null,
-                'data'     => $resp,
+                'status'   => 500,
+                'error'    => 1,
+                'data'     => [],
                 'messages' => [
-                    'success' => 'Process data information'
+                    'success' => 'Unknow internal error: ' . $ex->getMessage()
                     ]
                 ];
-            return $this->respond($response);
+            return $this->respond($response,500);
         }
     }
 }
