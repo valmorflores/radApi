@@ -5,6 +5,7 @@ use App\Models\ClientsModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 use App\Controllers\BaseController;
+use App\Controllers\Tables;
 
 class About extends ResourceController
 {
@@ -12,9 +13,18 @@ class About extends ResourceController
     
     private $session;
 
+    private $defaultDb;
+
+    private $radApiDb;
+
+    private $tables;
+
     public function __construct()
     {
+        $this->defaultDb = db_connect(); // default database group
+        $this->radApiDb = db_connect("radapi"); // other database group
         $this->session = session();
+        $this->tables = new Tables();
         helper('profile');
     }
 
@@ -66,6 +76,7 @@ class About extends ResourceController
         $data['people'] = $this->people();
         $data['changelog'] = $this->changelog();
         $data['resource'] = '/about';
+        $data['table_list'] = $this->tables->internaltablelist();
         $password = '0';
         if(defined('PASSWORD_ARGON2ID')) {
             $data['pwd_argon'] = password_hash( $password, PASSWORD_ARGON2I );
