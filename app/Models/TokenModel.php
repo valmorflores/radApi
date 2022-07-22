@@ -19,7 +19,10 @@ class TokenModel extends Model
             'EXPIRES_AT_DATE'];
 
     public function __construct(){       
+        
         parent::__construct();
+        $this->db = \Config\Database::connect('radapi');
+
     }
 
     public function saveToken(TokenObjModel $token ): void {

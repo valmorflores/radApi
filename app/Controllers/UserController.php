@@ -21,11 +21,11 @@ class UserController extends ResourceController {
     *              user/login?email=usuarioexemplo@gmail.com&password=123
     */
     public function login() {
-        $this->UserModel = new UserModel();
+        $this->UserModel = new UserModel();        
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         // Stage 1 - User validation
-        $resp = $this->UserModel->getLogin($email,$password);
+        $resp = $this->UserModel->getLogin($email,$password);        
         if (count($resp)<1){
             $responseCode = 404;
             $response = [
@@ -46,7 +46,7 @@ class UserController extends ResourceController {
         } else {
             $passwordFromRequest = password_hash( $password, PASSWORD_DEFAULT, 
                  array('time_cost' => 10, 'memory_cost' => '2048k', 'threads' => 6) );
-        }
+        }       
         $passwordFromBase = $resp[0]->PASSWORD ?? '';
         $verifyOk = password_verify( $password, $passwordFromBase);
         $responseCode = 200;

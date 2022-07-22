@@ -9,11 +9,16 @@ class TableDataModel extends Model
  
     protected $allowedFields;
 
+    public function __construct()
+    {
+        $this->db = \Config\Database::connect('default');
+    }
+
     public function countTable($table){
        $builder = $this->db->table($table);
        $builder = $builder->countAll();
         
-		return $builder;
+	    return $builder;
     }
 
 	public function getFromTable($table, $offset = 0, $limit = 0){
@@ -22,7 +27,7 @@ class TableDataModel extends Model
             $query = $builder->get();//$this->db->query('SELECT * FROM ' . $table);        
         } else {
             $query = $builder->get($limit,$offset);
-        }        
+        }
         $results = $query->getResult();
         return $results;
     }

@@ -34,7 +34,6 @@ class TablesData extends ResourceController
         {
             $dataSet = $this->TableDataModel->getFromTable($table, $offset, $records);
             $list=[];
-            
             foreach ($dataSet as $row)
             {
                 $info = $row;
@@ -57,6 +56,7 @@ class TablesData extends ResourceController
             return $this->respond($response);
         }
     }
+    
     public function getdatacount($table = '', $offset = 1, $records = 0) {
 
         $info = new BaseController();

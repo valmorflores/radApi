@@ -7,11 +7,19 @@ use CodeIgniter\Model;
 class UserModel extends Model
 {
 
+    
     protected $table      = 'TBLUSER';
     protected $primaryKey = 'ID';
     protected $returnType = 'array';
- 
+    
+    function __construct()
+    {
+        $this->db = \Config\Database::connect('radapi');
+    }
+
+
     public function getLogin($userEmail,$password){
+        $this->db = \Config\Database::connect('radapi');
         $query   = $this->db->query(
             "SELECT * FROM TBLUSER " . 
             " WHERE EMAIL = " . $this->db->escape($userEmail) . 
